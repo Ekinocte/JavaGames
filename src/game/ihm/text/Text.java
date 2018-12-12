@@ -28,7 +28,7 @@ public class Text
     
     /* ------------- Getters and setters -----------------*/
 
-    public App getGame()
+    public App getApp()
     {
         return this.app;
     }
@@ -37,6 +37,9 @@ public class Text
     {
     	int endGame = 1;
     	Scanner sc = new Scanner(System.in);
+        
+        this.addPlayers();
+        
     	// Choix du jeu
         while (endGame!=0)
         {
@@ -50,7 +53,7 @@ public class Text
                 	int cptMatches = 3;
                 	int cptTakeMatches = 2;
                 	boolean lastObjectTakenWin = false;
-                	int bool = 2;
+                	int scannerTest = 2;
                 	boolean historic = false;
                 	
                 	while(cptMatches<3) 
@@ -63,28 +66,28 @@ public class Text
                 		System.out.println("Number of selected matches: ");
                 		cptMatches = sc.nextInt();
                 	}
-                	while(bool >1 || bool<0)
+                	while(scannerTest >1 || scannerTest<0)
                 	{
                 		System.out.println("0: You lose if you take the last matche");
                 		System.out.println("1: You win if you take the last matche");
                 		
-                		bool = sc.nextInt();
+                		scannerTest = sc.nextInt();
                 	}
-                	if(bool == 1) 
+                	if(scannerTest == 1) 
                 	{
                 		lastObjectTakenWin = true;
                 	}else {
                 		lastObjectTakenWin = false;
                 	}
-                	bool = 2;
-                	while(bool >1 || bool<0)
+                	scannerTest = 2;
+                	while(scannerTest >1 || scannerTest<0)
                 	{
                 		System.out.println("0: Without historic?");
                 		System.out.println("1: With historic?");
-                		bool = sc.nextInt();
+                		scannerTest = sc.nextInt();
                 	}
                 	
-                	if(bool == 1) 
+                	if(scannerTest == 1) 
                 	{
                 		lastObjectTakenWin = true;
                 	}
@@ -92,15 +95,38 @@ public class Text
                 	{
                 		lastObjectTakenWin = false;
                 	}
-                	bool = 2;
+                	scannerTest = 2;
                 	
                 	this.app.setGameSelected(new Nim(cptMatches, cptTakeMatches, lastObjectTakenWin, historic));
-                	this.app.addplayers(nim.getMaxPlayers());
+                	this.app.getGameSelected().addPlayersInGame(
+                            this.app.getGameSelected().getMaxPlayers(),
+                            this.app.getTabPlayers());
+                        
+                        scannerTest = 3;
+                        while(scannerTest!=0 && scannerTest!=1 && scannerTest!=2)
+                        {
+                            System.out.println("0 : Random begginer ");
+                            System.out.println("1 : Younger begginer ");
+                            System.out.println("2 : First alphabetic lastname begginer ");
+                            scannerTest = sc.nextInt();
+                        }
                 	
-                	
-                	
+                        switch(scannerTest)
+                        {
+                            case 0 :
+                                this.app.randomSelectBegginer();
+                                break;
+                            case 1 :
+                                this.app.youngerSelectBegginer();
+                                break;
+                            case 2 :
+                                this.app.lastNameSelectBegginer();
+                                break;
+                            default :
+                                break;
+                        }
+                        
                 default :
-                   
                     break;
             }
         }
@@ -115,7 +141,7 @@ public class Text
         int bool = 2;
         boolean computer;
         int end = 2;
-        while(end!=0 || this.app.getGameSelected<2)
+        while(end!=0)
         {
             end = 2;
             bool = 2;

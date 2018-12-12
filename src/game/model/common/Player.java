@@ -13,7 +13,7 @@ public class Player
 {
     private String lastName;
     private int age;
-    private int cptGame = 0;
+    private int cptGameWin = 0;
     private int cptGamePlayed = 0;
     private boolean computer;
     private boolean inGame = false; // à voir.
@@ -48,14 +48,14 @@ public class Player
         this.age = age;
     }
     
-    public int getCptGame()
+    public int getCptGameWin()
     {
-        return this.cptGame;
+        return this.cptGameWin;
     }
     
-    public void setCptGame(int cptGame)
+    public void setCptGameWin(int cptGameWin)
     {
-        this.cptGame = cptGame;
+        this.cptGameWin = cptGameWin;
     }
     
     public int getCptGamePlayer()

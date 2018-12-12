@@ -21,8 +21,7 @@ public class App
     
     public App()
     {
-        this.players = new ArrayList<Player>();
-        
+        this.players = new ArrayList<Player>();   
     }
     
     /* ------------- Getters and setters -----------------*/
@@ -32,18 +31,26 @@ public class App
         return this.players.get(idPlayer);
     }
     
-    public Game getGameSelected() {
-		return gameSelected;
-	}
+    public Game getGameSelected() 
+    {
+        return gameSelected;
+    }
 
-	public void setGameSelected(Game gameSelected) {
-		this.gameSelected = gameSelected;
-	}
+    public void setGameSelected(Game gameSelected) 
+    {
+        this.gameSelected = gameSelected;
+    }
 
-	public void setPlayer(Player player)
+    public void setPlayer(Player player)
     {
         this.players.add(player);
     }
+       
+    public ArrayList<Player> getTabPlayers() 
+    {
+        return this.players;
+    }
+     
        
     /* ----------- Basic functions ----------------------------*/
     
@@ -53,8 +60,44 @@ public class App
     
     /* ------------------ Random Method ---------------------*/
     
-    /*public int randomSelect()
+    public void randomSelectBegginer()
     {
         Random rand = new Random();
-    }*/
+        this.beginPlayer = rand.nextInt(
+            this.getGameSelected().getPlayersInGame().size());
+    }
+    
+    /* ------------------ Younger Method ---------------------*/
+
+    public void youngerSelectBegginer()
+    {
+        int ageMin = this.getGameSelected().getPlayerInGame(0).getAge();
+        this.beginPlayer = 0;
+        for(int i=1; i<this.getGameSelected().getPlayersInGame().size(); i++)
+        {
+            if(ageMin < this.getGameSelected().getPlayerInGame(i).getAge());
+            {
+                ageMin = this.getGameSelected().getPlayerInGame(i).getAge();
+                this.beginPlayer = i;
+            }
+        }
+    }
+    
+    /* ------------------ First alphabetic lastname Method ---------------------*/
+
+    public void lastNameSelectBegginer()
+    {
+        String lastName = this.getGameSelected().getPlayerInGame(0).getLastName();
+        this.beginPlayer = 0;
+        for(int i=1; i<this.getGameSelected().getPlayersInGame().size(); i++)
+        {
+            if(lastName.toLowerCase().compareTo(
+                    this.getGameSelected().getPlayerInGame(i).
+                            getLastName().toLowerCase())<0)
+            {
+                lastName = this.getGameSelected().getPlayerInGame(i).getLastName();
+                this.beginPlayer = i;
+            }
+        }
+    }
 }

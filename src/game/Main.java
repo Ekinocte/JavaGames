@@ -37,7 +37,6 @@ public class Main
         if (gameMode == 1)
         {
             Text textGame = new Text();
-            textGame.addPlayers();
             textGame.textMain();
             
             // Affichage score + sortie.

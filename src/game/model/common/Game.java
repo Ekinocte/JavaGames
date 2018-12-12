@@ -6,15 +6,25 @@ import java.util.Scanner;
 public class Game 
 {
     private final int maxPlayers;
-	private ArrayList<Player> playersInGame;
+    private ArrayList<Player> playersInGame;
 	
-	protected Game(int maxPlayers)
-	{
-		this.playersInGame = new ArrayList<Player>();
-		this.maxPlayers = maxPlayers;
-	}
+    protected Game(int maxPlayers)
+    {
+        this.playersInGame = new ArrayList<Player>();
+        this.maxPlayers = maxPlayers;
+    }
 	
-	public Player getPlayerInGame(int idPlayer)
+    /* ------------- Getters and setters -----------------*/
+    public int getMaxPlayers()
+    {
+        return this.maxPlayers;
+    }
+
+    public ArrayList<Player> getPlayersInGame() {
+        return playersInGame;
+    }
+    
+    public Player getPlayerInGame(int idPlayer)
     {
         return this.playersInGame.get(idPlayer);
     }
@@ -26,7 +36,7 @@ public class Game
     
 /*------------------- Who playing? ----------------------*/
     
-    public void addplayers(int maxplayer, ArrayList<Player> globalPlayers)
+    public void addPlayersInGame(int maxplayer, ArrayList<Player> globalPlayers)
     {
     	Scanner sc = new Scanner(System.in);
     	int idPlayer = 0;
