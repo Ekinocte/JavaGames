@@ -65,7 +65,7 @@ public class App
     
     /* ------------------ Random Method ---------------------*/
 
-	public void randomSelectBegginer()
+    public void randomSelectBegginer()
     {
         Random rand = new Random();
         this.beginPlayer = rand.nextInt(

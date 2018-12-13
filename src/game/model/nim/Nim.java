@@ -85,10 +85,10 @@ public class Nim extends Game
     /* ------------- Nim Functions -----------------*/
 
 
-	public boolean validRound(int nbTakenMatches)
+    public boolean validRound(int nbTakenMatches)
     {
         return(nbTakenMatches <= this.cptTakeMatches && 
-                nbTakenMatches<=this.cptMatches);
+            nbTakenMatches<=this.cptMatches);
     }
     
     public void takeMatches(int nbTakenMatches)
@@ -123,10 +123,10 @@ public class Nim extends Game
     	//Check that there has been at last one round playing
     	if(nbRoundComeBack < this.stackHistoric.size())
     	{
-    		for(int i = 0; i<nbRoundComeBack; i++)
-    		{
-    			this.stackHistoric.pop();
-    		}
+            for(int i = 0; i<nbRoundComeBack; i++)
+            {
+                this.stackHistoric.pop();
+            }
     	}
     	
     	return 0; // error fatal
@@ -134,17 +134,21 @@ public class Nim extends Game
     
     /* --------------- AI Functions --------------------- */
     
-    public void aiEasy() 
+    public int aiEasy() 
     {
+        int nbMatches;
     	Random r = new Random();
     	if(this.cptMatches < this.cptTakeMatches)
     	{
-    		this.cptMatches -= (r.nextInt(this.cptMatches)+1);
+            nbMatches = r.nextInt(this.cptMatches)+1;
+            this.cptMatches -= nbMatches;
     	}
     	else 
     	{
-    		this.cptMatches -= (r.nextInt(this.cptTakeMatches)+1);
+            nbMatches = r.nextInt(this.cptTakeMatches)+1;
+            this.cptMatches -= nbMatches;
     	}
+        return nbMatches;
     }
     
     

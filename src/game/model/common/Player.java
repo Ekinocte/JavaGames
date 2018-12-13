@@ -16,7 +16,6 @@ public class Player
     private int cptGameWin = 0;
     private int cptGamePlayed = 0;
     private boolean computer;
-    private boolean inGame = false; // à voir.
     
     public Player(String lastName, int age, boolean computer)
     {
@@ -78,23 +77,13 @@ public class Player
         this.computer = computer;
     }
     
-    public boolean isInGame()
-    {
-        return this.inGame;
-    }
-    
-    public void setInGame(boolean inGame)
-    {
-        this.inGame = inGame;
-    }
-    
     /* -------------- Basic methods ---------------------*/
     
     @Override
     public String toString()
     {
         return this.lastName + " - " + this.age + " - " + "computer: " 
-                + this.computer + " - " + "in game : " +this.inGame; 
+                + this.computer + " - " + "in game : "; 
     }
     
 }

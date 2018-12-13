@@ -45,14 +45,13 @@ public class Game
     	System.out.print(this.playersToString(globalPlayers));
     	System.out.println("number of player who want playing (enter on by one): ");
     	
-    	while(idPlayer != -1 || this.playersInGame.size() < maxplayer)
+    	while(idPlayer != -1 && this.playersInGame.size() < maxplayer)
     	{
     		idPlayer = sc.nextInt();
     		if(idPlayer != -1) 
     		{
-    			Player p = globalPlayers.get(idPlayer);
-    			this.playersInGame.add(p);
-    			p.setInGame(true);
+                    Player p = globalPlayers.get(idPlayer);
+                    this.playersInGame.add(p);
     		} 		
     	}
     }
