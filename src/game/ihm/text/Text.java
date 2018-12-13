@@ -126,11 +126,48 @@ public class Text
                                 break;
                         }
                         
+                        Nim gameP = ((Nim)(this.app.getGameSelected()));	
+                    	int cptRound = 0;
+                    	Player pLast = gameP.getPlayerInGame(this.app.getBeginPlayer());
+                        while(gameP.getMatches()>0)
+                        {
+                        	for(Player p : gameP.getPlayersInGame())
+                        	{
+                        		//0 because for the moment we have only 2 players
+                        		if(((cptRound == 0 && this.app.getBeginPlayer() == 0) || (cptRound !=0))
+                        				&& gameP.getMatches() != 0)
+                        		{
+                        			if(p.isComputer()) 
+                        			{
+                        				gameP.aiEasy();
+                        			}
+                        			else
+                        			{
+                        				
+                        			}
+                        			
+                        			pLast = p;
+                        		}
+                        		cptRound++;
+                        	}
+                        }
+                        Player winner;
+                        if(gameP.getPlayerInGame(0) == pLast)
+                		{                     	
+                			winner = gameP.whoWin(pLast, gameP.getPlayerInGame(1));
+                		}
+                		else
+                		{
+                			winner = gameP.whoWin(pLast, gameP.getPlayerInGame(0)); 
+                		}
+                        System.out.println(winner.toString()+" win!");
+                        
                 default :
                     break;
             }
         }
     }
+    
     
     /* ------------- We select all the players -------------*/
     
@@ -166,6 +203,7 @@ public class Text
             }
         }
     } 
+    
     
     /* ------------------- Game Selection -----------------------*/
     

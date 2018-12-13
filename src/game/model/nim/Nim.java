@@ -5,6 +5,7 @@
  */
 package game.model.nim;
 
+import java.util.Random;
 import java.util.Stack;
 
 import game.model.common.Game;
@@ -21,7 +22,7 @@ public class Nim extends Game
     private int cptTakeMatches; // cptTakeMatches = K
     private boolean lastObjectTakenWin; // lastObjectTaken = V
     private boolean historic;
-    private Stack stack= new Stack();
+    private Stack<Integer> stackHistoric= new Stack<Integer>();
     private final int maxPlayers = 2;
     
     /* --- On sélectionne les joueurs qui participeront à ce jeu ---*/
@@ -35,6 +36,7 @@ public class Nim extends Game
         this.lastObjectTakenWin = lastObjectTakenWin;
         this.historic = historic;
     }
+    
     
     /* ------------- Getters and setters -----------------*/
 
@@ -69,9 +71,21 @@ public class Nim extends Game
         return this.lastObjectTakenWin;
     }
     
+    public boolean isHistoric() 
+    {
+		return historic;
+	}
+
+	public void setHistoric(boolean historic) 
+	{
+		this.historic = historic;
+	}
+    
+    
     /* ------------- Nim Functions -----------------*/
 
-    public boolean validRound(int nbTakenMatches)
+
+	public boolean validRound(int nbTakenMatches)
     {
         return(nbTakenMatches <= this.cptTakeMatches && 
                 nbTakenMatches<=this.cptMatches);
@@ -82,19 +96,56 @@ public class Nim extends Game
         this.cptMatches = this.cptMatches - nbTakenMatches;
     }
     
-    public boolean whoWin(Player player, Player player2)
+    public Player whoWin(Player player, Player player2)
     {
-        boolean res = false;
+    	Player p;
         if (this.lastObjectTakenWin)
         {
             player.setCptGameWin(player.getCptGameWin()+1);
-            res = true;
+            p = player;
+            
         }
         else
         {
             player.setCptGameWin(player2.getCptGameWin()+1);
+            p = player2;
         }
-        return res;
+        return p;
     }
+    
+    public void addRoundHistoric(int nbMatchesTakenInRound)
+    {
+    	this.stackHistoric.push(nbMatchesTakenInRound);
+    }
+    
+    public int commeBack(int nbRoundComeBack)
+    {
+    	//Check that there has been at last one round playing
+    	if(nbRoundComeBack < this.stackHistoric.size())
+    	{
+    		for(int i = 0; i<nbRoundComeBack; i++)
+    		{
+    			this.stackHistoric.pop();
+    		}
+    	}
+    	
+    	return 0; // error fatal
+    }
+    
+    /* --------------- AI Functions --------------------- */
+    
+    public void aiEasy() 
+    {
+    	Random r = new Random();
+    	if(this.cptMatches < this.cptTakeMatches)
+    	{
+    		this.cptMatches -= (r.nextInt(this.cptMatches)+1);
+    	}
+    	else 
+    	{
+    		this.cptMatches -= (r.nextInt(this.cptTakeMatches)+1);
+    	}
+    }
+    
     
 }

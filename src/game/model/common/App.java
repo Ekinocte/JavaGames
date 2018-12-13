@@ -50,6 +50,11 @@ public class App
     {
         return this.players;
     }
+    
+    public int getBeginPlayer() 
+    {
+		return beginPlayer;
+	}
      
        
     /* ----------- Basic functions ----------------------------*/
@@ -59,8 +64,8 @@ public class App
     
     
     /* ------------------ Random Method ---------------------*/
-    
-    public void randomSelectBegginer()
+
+	public void randomSelectBegginer()
     {
         Random rand = new Random();
         this.beginPlayer = rand.nextInt(
