@@ -1,7 +1,7 @@
 package game.ihm.text;
 
 import game.model.common.App;
-import game.model.common.Player;
+import game.model.common.player.Player;
 import game.model.nim.Nim;
 
 import java.util.Scanner;

@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Stack;
 
 import game.model.common.Game;
-import game.model.common.Player;
+import game.model.common.player.Player;
 
 /**
  *

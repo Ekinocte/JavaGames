@@ -1,5 +1,6 @@
 package game.model.common;
 
+import game.model.common.player.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
 
