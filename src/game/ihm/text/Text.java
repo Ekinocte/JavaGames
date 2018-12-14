@@ -1,6 +1,8 @@
 package game.ihm.text;
 
 import game.model.common.App;
+import game.model.common.player.Computer;
+import game.model.common.player.Human;
 import game.model.common.player.Player;
 import game.model.nim.Nim;
 
@@ -188,8 +190,6 @@ public class Text
             bool = 2;
             System.out.println("Player Name?");
             lastName = sc.next();
-            System.out.println("Age?");
-            age = sc.nextInt(); 
             while (bool !=0 && bool !=1)
             {
                 System.out.println("It is a computer?");
@@ -198,7 +198,17 @@ public class Text
                 bool = sc.nextInt();
             }            
             computer = bool == 1; // 1 it's true.
-            this.app.setPlayer(new Player(lastName, age, computer));
+            if (computer == true)
+            {
+                this.app.setPlayer(new Computer(lastName));
+            }
+            else
+            {
+                System.out.println("Age?");
+                age = sc.nextInt(); 
+                this.app.setPlayer(new Human(lastName, age));
+            }
+            
             while ((end !=0 || this.app.getTabPlayers().size()<2) && end !=1)
             {
                 System.out.println("1 : next player");

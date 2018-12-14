@@ -9,13 +9,13 @@ package game.model.common.player;
  *
  * @author Guillaume and Florian
  */
-abstract class Player 
+public class Player 
 {
     private String lastName;
     private int cptGameWin = 0;
     private int cptGamePlayed = 0;
     
-    public Player(String lastName)
+    protected Player(String lastName)
     {
         this.lastName = lastName;
     }

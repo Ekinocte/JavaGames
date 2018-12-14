@@ -5,6 +5,7 @@
  */
 package game.model.common;
 
+import game.model.common.player.Human;
 import game.model.common.player.Player;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Guillaume ands Florian
+ * @author Guillaume and Florian
  */
 public class App 
 {
@@ -54,8 +55,8 @@ public class App
     
     public int getBeginPlayer() 
     {
-		return beginPlayer;
-	}
+	return beginPlayer;
+    }
      
        
     /* ----------- Basic functions ----------------------------*/
@@ -77,13 +78,13 @@ public class App
 
     public void youngerSelectBegginer()
     {
-        int ageMin = this.getGameSelected().getPlayerInGame(0).getAge();
+        int ageMin = 200;
         this.beginPlayer = 0;
         for(int i=1; i<this.getGameSelected().getPlayersInGame().size(); i++)
         {
-            if(ageMin < this.getGameSelected().getPlayerInGame(i).getAge());
+            if (this.gameSelected.getPlayersInGame().get(i) instanceof Human)
             {
-                ageMin = this.getGameSelected().getPlayerInGame(i).getAge();
+                // To complete
                 this.beginPlayer = i;
             }
         }
