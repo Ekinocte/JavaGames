@@ -9,7 +9,6 @@ import game.model.common.player.Human;
 import game.model.common.player.Player;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  *
