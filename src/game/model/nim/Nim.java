@@ -24,6 +24,8 @@ public class Nim extends Game
     private boolean historic;
     private Stack<Integer> stackHistoric= new Stack<Integer>();
     private final int maxPlayers = 2;
+    public final static int cptMatchesMin = 3;
+    public final static int cptTakeMatchesMin = 2;
     
     /* --- On sélectionne les joueurs qui participeront à ce jeu ---*/
     
@@ -73,27 +75,27 @@ public class Nim extends Game
     
     public boolean isHistoric() 
     {
-		return historic;
-	}
+	return historic;
+    }
 
-	public void setHistoric(boolean historic) 
-	{
-		this.historic = historic;
-	}
+    public void setHistoric(boolean historic) 
+    {
+        this.historic = historic;
+    }
     
     
     /* ------------- Nim Functions -----------------*/
 
 
     public boolean validRound(int nbTakenMatches)
-    {
+    {    
         return(nbTakenMatches <= this.cptTakeMatches && 
-            nbTakenMatches<=this.cptMatches);
+            nbTakenMatches<=this.cptMatches && nbTakenMatches >0);
     }
     
     public void takeMatches(int nbTakenMatches)
     {
-        this.cptMatches = this.cptMatches - nbTakenMatches;
+        this.cptMatches -= nbTakenMatches;
     }
     
     public Player whoWin(Player player, Player player2)
@@ -113,43 +115,25 @@ public class Nim extends Game
         return p;
     }
     
-    public void addRoundHistoric(int nbMatchesTakenInRound)
+    public void addRoundHistoric(int nbMatchesTaken)
     {
-    	this.stackHistoric.push(nbMatchesTakenInRound);
+    	this.stackHistoric.push(nbMatchesTaken);
     }
     
     public int commeBack(int nbRoundComeBack)
     {
+        int test = 0;
     	//Check that there has been at last one round playing
     	if(nbRoundComeBack < this.stackHistoric.size())
     	{
             for(int i = 0; i<nbRoundComeBack; i++)
             {
+                this.cptMatches += this.stackHistoric.peek();
                 this.stackHistoric.pop();
             }
+            test = 1;
     	}
-    	
-    	return 0; // error fatal
+    	return test; // Fatal Error
     }
-    
-    /* --------------- AI Functions --------------------- */
-    
-    public int aiEasy() 
-    {
-        int nbMatches;
-    	Random r = new Random();
-    	if(this.cptMatches < this.cptTakeMatches)
-    	{
-            nbMatches = r.nextInt(this.cptMatches)+1;
-            this.cptMatches -= nbMatches;
-    	}
-    	else 
-    	{
-            nbMatches = r.nextInt(this.cptTakeMatches)+1;
-            this.cptMatches -= nbMatches;
-    	}
-        return nbMatches;
-    }
-    
     
 }

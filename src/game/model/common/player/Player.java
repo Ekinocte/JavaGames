@@ -11,9 +11,9 @@ package game.model.common.player;
  */
 public class Player 
 {
-    private String lastName;
-    private int cptGameWin = 0;
-    private int cptGamePlayed = 0;
+    protected String lastName;
+    protected int cptGameWin = 0;
+    protected int cptGamePlayed = 0;
     
     protected Player(String lastName)
     {

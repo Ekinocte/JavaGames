@@ -1,14 +1,18 @@
 package game.model.common;
 
+import game.model.common.player.Human;
 import game.model.common.player.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Game 
 {
     private final int maxPlayers;
     private ArrayList<Player> playersInGame;
-	
+    private int beginPlayer; //Correspond à la méthode qui définie le joueur qui commence
+
+        
     protected Game(int maxPlayers)
     {
         this.playersInGame = new ArrayList<Player>();
@@ -35,26 +39,9 @@ public class Game
         this.playersInGame.add(player);
     }
     
-/*------------------- Who playing? ----------------------*/
-    
-    public void addPlayersInGame(int maxplayer, ArrayList<Player> globalPlayers)
+    public int getBeginPlayer() 
     {
-    	Scanner sc = new Scanner(System.in);
-    	int idPlayer = 0;
-    	
-    	System.out.println("-1 for leave player selection");
-    	System.out.print(this.playersToString(globalPlayers));
-    	System.out.println("number of player who want playing (enter on by one): ");
-    	
-    	while(idPlayer != -1 && this.playersInGame.size() < maxplayer)
-    	{
-    		idPlayer = sc.nextInt();
-    		if(idPlayer != -1) 
-    		{
-                    Player p = globalPlayers.get(idPlayer);
-                    this.playersInGame.add(p);
-    		} 		
-    	}
+	return beginPlayer;
     }
     
     /* ----------- Basic functions ----------------------------*/
@@ -68,5 +55,60 @@ public class Game
             id++;
         }
         return str;
+    }
+    
+    /* ------------------ Who's begin? ----------------------*/
+    
+    
+    /* ------------------ Random Method ---------------------*/
+
+    public void randomSelectBegginer()
+    {
+        Random rand = new Random();
+        this.beginPlayer = rand.nextInt(
+            this.getPlayersInGame().size());
+    }
+    
+    /* ------------------ Younger Method ---------------------*/
+
+    public void youngerSelectBegginer()
+    {
+        this.beginPlayer = 0;
+        int ageMin = 999999999;
+        for(int i=1; i<this.getPlayersInGame().size(); i++)
+        {
+            if (this.getPlayersInGame().get(i) instanceof Human)
+            {
+                Human humain = ((Human)this.getPlayerInGame(i));
+                /*if (ageMin == null)
+                {
+                    this.beginPlayer = i;
+                    ageMin = humain.getAge();
+                }*/
+                if (humain.getAge() < ageMin)
+                {
+                    this.beginPlayer = i;
+                    ageMin = humain.getAge();
+                }
+            }
+        }
+    }
+    
+    /* ------------------ First alphabetic lastname Method ---------------------*/
+
+    public void lastNameSelectBegginer()
+    {
+        String lastName = this.getPlayerInGame(0).getLastName();
+        this.beginPlayer = 0;
+        for(int i=1; i<this.getPlayersInGame().size(); i++)
+        {
+            if(lastName.toLowerCase().compareTo(
+                    this.getPlayerInGame(i).
+                            getLastName().toLowerCase())>0)
+            {
+                lastName = this.getPlayerInGame(i).getLastName();
+                this.beginPlayer = i;
+            }
+        }
     }
 }

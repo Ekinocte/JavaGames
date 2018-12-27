@@ -5,14 +5,33 @@
  */
 package game.model.common.player;
 
+import java.util.Random;
+
 /**
  *
- * @author Guillaume and Florian
+ * @author Guillaume et Florian
  */
 public class ComputerNim extends Computer
-{    
-    public ComputerNim(String lastName) 
+{
+    public ComputerNim(String lastName)
     {
         super(lastName);
-    }    
+    }
+    
+    /* --------------- AI Functions --------------------- */
+    
+    public int aiEasy(int cptMatches, int cptTakeMatches) 
+    {
+        int nbMatches;
+    	Random r = new Random();
+    	if(cptMatches < cptTakeMatches)
+    	{
+            nbMatches = r.nextInt(cptMatches)+1;
+    	}
+    	else 
+    	{
+            nbMatches = r.nextInt(cptTakeMatches)+1;
+    	}
+        return nbMatches;
+    }
 }

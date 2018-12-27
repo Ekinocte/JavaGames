@@ -17,4 +17,10 @@ public class Computer extends Player
         super(lastName);
     }
     
+    @Override
+    public String toString()
+    {
+        return "lastName : " + this.lastName + " Computer";
+    }
+    
 }

@@ -6,8 +6,6 @@
 package game;
 
 import game.ihm.text.Text;
-import game.model.nim.Nim;
-
 import java.util.Scanner;
 
 /**
@@ -38,8 +36,6 @@ public class Main
         {
             Text textGame = new Text();
             textGame.textMain();
-            
-            // Affichage score + sortie.
         }
         else
         {
