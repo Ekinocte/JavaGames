@@ -128,6 +128,8 @@ public class Nim extends Game
     	{
             for(int i = 0; i<nbRoundComeBack; i++)
             {
+            	System.out.println(this.cptMatches+" matches");
+            	System.out.println(this.stackHistoric.peek());
                 this.cptMatches += this.stackHistoric.peek();
                 this.stackHistoric.pop();
             }

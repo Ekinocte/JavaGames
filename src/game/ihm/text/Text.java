@@ -122,40 +122,42 @@ public class Text
                     }
 
                     Nim gameP = ((Nim)(this.app.getGameSelected()));	
-                    int cptRound = 0;
-                    Player pLast = gameP.getPlayerInGame(this.app.getGameSelected().getBeginPlayer());
+                    int cptRound = 1;
+                    boolean firstRound = true;
+                    int nbMatches = 0;
+                    Player pLast = gameP.getPlayerInGame(gameP.getBeginPlayer());
                     while(gameP.getMatches()>0)
                     {
                         for(Player p : gameP.getPlayersInGame())
                         {
                             //0 because for the moment we have only 2 players
-                            if(((cptRound == 0 && this.getApp().getGameSelected().getBeginPlayer() == 0) 
-                                    || (cptRound !=0)) && gameP.getMatches() != 0)
+                            if(((firstRound && gameP.getBeginPlayer() == 0) 
+                                    || (!firstRound)) && gameP.getMatches() != 0)
                             {
                                 System.out.println(gameP.getMatches() + " matches left");
                                 
                                 if(p instanceof ComputerNim) 
                                 {
-                                    System.out.println("Ai round :" + p.toString());
-                                    int nbMatches = ((ComputerNim)p).aiEasy(
+                                    System.out.println("Round "+cptRound+": " + p.toString());
+                                    nbMatches = ((ComputerNim)p).aiEasy(
                                         gameP.getMatches(),gameP.getCptTakeMatches());
                                     gameP.takeMatches(nbMatches);
                                     if (gameP.isHistoric())
                                     {
                                         gameP.addRoundHistoric(nbMatches);
                                     }
-                                    System.out.println("Ai have taken " + nbMatches + " matches\n");
+                                    System.out.println(p.getLastName()+" have taken " + nbMatches + " matches\n");
                                 }
                                 else
                                 {
-                                    System.out.println("Human round :" + p.toString());
-                                    int nbMatches = 0;
+                                    System.out.println("Round "+cptRound+": " + p.toString());
+                                   
                                                                         
                                     if (gameP.isHistoric())
                                     {
                                         int nbRoundComeBack =0;
                                         scannerTest = 2;
-                                        if(cptRound ==0)
+                                        if(cptRound ==1)
                                         {
                                             scannerTest = 1;
                                             System.out.println(scannerTest);
@@ -168,10 +170,8 @@ public class Text
                                         }
                                         if (scannerTest == 1)
                                         {
-                                            playerRound(gameP, nbMatches); 
+                                            nbMatches = playerRound(gameP, 0); 
                                             gameP.addRoundHistoric(nbMatches);
-                                            nbMatches = 0;
-
                                         }
                                         else
                                         {
@@ -185,17 +185,21 @@ public class Text
                                             cptRound -= nbRoundComeBack;
                                             if (nbRoundComeBack%2 ==0)
                                             {
-                                                playerRound(gameP, nbMatches);
+                                            	System.out.println(gameP.getMatches() + " matches left");
+                                            	System.out.println("Round "+cptRound+": " + p.toString());
+                                                nbMatches = playerRound(gameP, 0);
                                                 gameP.addRoundHistoric(nbMatches);
-                                                nbMatches = 0;
+                                            }
+                                            else
+                                            {
+                                            	cptRound--;
                                             }
 
                                         }
                                     }
                                     else
                                     {
-                                        playerRound(gameP, nbMatches);
-                                        nbMatches = 0;
+                                        nbMatches = playerRound(gameP, 0);
                                     }  
                                     System.out.println(p.getLastName() + " have taken " + nbMatches + " matches\n");
                                 }
@@ -203,6 +207,11 @@ public class Text
                                 pLast = p;
                             }
                             cptRound++;
+                            if(gameP.getBeginPlayer() == 1 && firstRound) 
+                            {
+                            	cptRound--;
+                            }
+                            firstRound = false;
                         }
                     }
                     System.out.println("Game over :");
@@ -316,7 +325,7 @@ public class Text
     
     /*---------------------- Player Round ------------------------*/
     
-    public void playerRound(Nim gameP, int nbMatches)
+    public int playerRound(Nim gameP, int nbMatches)
     {
         while (!gameP.validRound(nbMatches))
         {
@@ -324,5 +333,7 @@ public class Text
             nbMatches = sc.nextInt();
         }
         gameP.takeMatches(nbMatches);
+        
+        return nbMatches;
     }
 }
