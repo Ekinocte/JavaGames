@@ -3,6 +3,8 @@ package game.ihm.graphic;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -18,7 +20,7 @@ import javax.swing.JTextPane;
 import game.model.common.App;
 import game.model.common.player.Player;
 
-public class PlayersChoice extends JFrame{
+public class PlayersChoice extends JFrame implements ActionListener{
 	
 	private App app;
 	
@@ -30,7 +32,6 @@ public class PlayersChoice extends JFrame{
 	
 	private JPanel footer;
 	private JButton bvalid;
-	private JButton bprevious;
 	private JButton	badd;
 	
 	public PlayersChoice (App app) {
@@ -43,10 +44,8 @@ public class PlayersChoice extends JFrame{
 		this.PlayerChoice();
 		
 		this.footer = new JPanel();
-		this.bprevious = new JButton("Previous");
 		this.bvalid = new JButton("Next");
 		
-		this.footer.add(this.bprevious);
 		this.footer.add(this.bvalid);
 		
 		this.getContentPane().add(title, BorderLayout.NORTH);
@@ -73,9 +72,10 @@ public class PlayersChoice extends JFrame{
 		for(Player p : players) {
 			this.playersList.addItem(p);
 		}
-		this.playersList.setMaximumSize(new Dimension(200, 50));
+		this.playersList.setMaximumSize(new Dimension(400, 50));
 		
 		this.badd = new JButton("Add");
+		this.badd.addActionListener(this);
 		this.badd.setAlignmentX(JButton.CENTER_ALIGNMENT);
 		
 		this.labelList = new JLabel("Players in game:");
@@ -90,6 +90,19 @@ public class PlayersChoice extends JFrame{
 		if(!inG.isEmpty()) {
 			for(Player p : inG) {
 				this.body.add(new JLabel("- "+p.toString()));
+			}
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		if(evt.getSource() == this.badd) {
+			if(!this.app.getTabPlayers().isEmpty()) {
+				Player p = (Player)this.playersList.getSelectedItem();
+				this.app.getGameSelected().setPlayerInGame(p);
+				this.body.add(new JLabel("- "+p.toString()));
+				this.body.revalidate();
+				this.body.repaint();
 			}
 		}
 	}
