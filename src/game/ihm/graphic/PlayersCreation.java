@@ -1,6 +1,5 @@
 package game.ihm.graphic;
 
-import game.ihm.events.PlayersCreationBtnHuman;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,8 +15,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import game.model.common.App;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PlayersCreation extends JFrame
+public class PlayersCreation extends JFrame implements ActionListener
 {
     private App app;
 
@@ -74,7 +75,6 @@ public class PlayersCreation extends JFrame
         this.human = new JRadioButton("Human");
         this.human.setAlignmentX(JButton.CENTER_ALIGNMENT);
         this.human.setSelected(true);
-        this.human.setActionCommand("btnHuman");
         this.computer = new JRadioButton("Computer");
         this.computer.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
@@ -88,7 +88,7 @@ public class PlayersCreation extends JFrame
         this.body.add(this.name);
         this.name.setMaximumSize(new Dimension(150,30));
         
-        this.human.addActionListener(new PlayersCreationBtnHuman());
+        this.human.addActionListener(this);
     }
 
     public int getPlayerNumber() 
@@ -101,5 +101,16 @@ public class PlayersCreation extends JFrame
         return n;
     }
     
+    @Override
+    public void actionPerformed(ActionEvent ae) 
+    {
+        if(ae.getSource() instanceof JRadioButton)
+        {
+           if(((JRadioButton)ae.getSource()).isSelected())
+           {
+                System.out.println("test");
+           }
+        }
+    }
     
 }

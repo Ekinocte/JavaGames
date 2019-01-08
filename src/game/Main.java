@@ -40,7 +40,7 @@ public class Main
         }
         else
         {
-           new PlayersCreation();
+            new PlayersCreation();
         }
     }
     
