@@ -5,6 +5,7 @@
  */
 package game;
 
+import game.ihm.graphic.PlayersCreation;
 import game.ihm.text.Text;
 import java.util.Scanner;
 
@@ -39,7 +40,7 @@ public class Main
         }
         else
         {
-           
+           new PlayersCreation();
         }
     }
     
