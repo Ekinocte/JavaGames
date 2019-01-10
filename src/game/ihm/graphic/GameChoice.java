@@ -49,12 +49,10 @@ public class GameChoice extends JFrame implements ActionListener{
 		
 		this.validGame = new JButton("Confirm game");
 		
-		this.rules = new JPanel();
-		this.Nim();
-		
 		this.body = new JPanel();
 		this.body.add(this.games);
 		this.body.add(this.validGame);
+		this.Nim();
 		
 		this.bvalid = new JButton("Ok");
 		this.bvalid.addActionListener(this);
