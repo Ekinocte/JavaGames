@@ -88,9 +88,9 @@ public class PlayersChoice extends JFrame{
 		this.body.add(this.badd);
 		this.body.add(this.labelList);
 		if(!inG.isEmpty()) {
-			for(Player p : inG) {
-				this.body.add(new JLabel("- "+p.toString()));
-			}
+                    for(Player p : inG) {
+                            this.body.add(new JLabel("- "+p.toString()));
+                    }
 		}
 	}
 }

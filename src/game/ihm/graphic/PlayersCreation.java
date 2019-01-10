@@ -17,7 +17,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
+import game.ihm.events.mousePlayersCreation;
 import game.model.common.App;
+import game.model.common.player.Computer;
+import game.model.common.player.Human;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -25,7 +28,7 @@ public class PlayersCreation extends JFrame implements ActionListener
 {
     private App app;
 
-    private JLabel title; 
+    private final JLabel title; 
 
     private JPanel body;
     private JLabel titleBody;
@@ -44,10 +47,12 @@ public class PlayersCreation extends JFrame implements ActionListener
     private JButton bvalid;
     private JButton bfinish;
     
-    private int jour =2;
-    private int mois =1;
-    private int annee =1984;
+    private int jour;
+    private int mois;
+    protected int annee;
 
+    private int cpt=1; //nb players.
+    
     public PlayersCreation() 
     {
         this.setPreferredSize(new Dimension(600, 600));// a enlever
@@ -62,25 +67,18 @@ public class PlayersCreation extends JFrame implements ActionListener
         this.bfinish = new JButton("Terminate");
 
         this.footer.add(this.bvalid);
-        this.footer.add(this.bfinish);
-
         this.playerCreation();
-
-        this.getContentPane().add(title, BorderLayout.NORTH);
-        this.getContentPane().add(body, BorderLayout.CENTER);
-        this.getContentPane().add(footer, BorderLayout.SOUTH);
-
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void playerCreation() //rempli le JPanel du body
+    private void playerCreation() //rempli le JPanel du body
     {
         this.body = new JPanel();
         this.body.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.titleBody = new JLabel("Player "+this.getPlayerNumber());
+        this.titleBody = new JLabel("Player "+this.cpt);
         this.body.setLayout(new BoxLayout(this.body, BoxLayout.Y_AXIS));
         this.body.add("Center",this.titleBody);
 
@@ -104,6 +102,18 @@ public class PlayersCreation extends JFrame implements ActionListener
         this.birthdate();
         this.computer.addActionListener(this);
         this.human.addActionListener(this);
+        
+        // Avatar in comming
+        if (this.app.getTabPlayers().size() >=2)
+        {
+            this.footer.add(this.bfinish);
+        }
+        this.bvalid.addMouseListener(new mousePlayersCreation());
+        this.bfinish.addActionListener(this);
+        
+        this.getContentPane().add(title, BorderLayout.NORTH);
+        this.getContentPane().add(body, BorderLayout.CENTER);
+        this.getContentPane().add(footer, BorderLayout.SOUTH);
     }
 
     public int getPlayerNumber() 
@@ -115,6 +125,8 @@ public class PlayersCreation extends JFrame implements ActionListener
         }
         return n;
     }
+    
+    /*--------------  age calcul ---------------------*/
     
     public void birthdate()
     {
@@ -131,7 +143,7 @@ public class PlayersCreation extends JFrame implements ActionListener
         {
             this.month.addItem(i);
         }
-        for (int i=1900; i<=2019; i++)
+        for (int i=2019; i>=1900; i--)
         {
             this.year.addItem(i);
         }
@@ -160,7 +172,6 @@ public class PlayersCreation extends JFrame implements ActionListener
         {
             res ++;
         }
-        System.out.println(res);
         return res;
     }
     /*------------ Events Listeners -----------------*/
@@ -173,7 +184,6 @@ public class PlayersCreation extends JFrame implements ActionListener
            if(((JRadioButton)ae.getSource()).isSelected())
            {
                 this.birthdate();
-                int res = this.AgeCalc();
            }
         }
         else if(ae.getSource() == this.computer)
@@ -186,8 +196,7 @@ public class PlayersCreation extends JFrame implements ActionListener
                 this.body.repaint();
             }
         }
-    }
-    
+    } 
     
     
 }
