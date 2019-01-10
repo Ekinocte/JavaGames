@@ -19,8 +19,6 @@ import javax.swing.JComboBox;
 
 import game.ihm.events.mousePlayersCreation;
 import game.model.common.App;
-import game.model.common.player.Computer;
-import game.model.common.player.Human;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -74,7 +72,7 @@ public class PlayersCreation extends JFrame implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void playerCreation() //rempli le JPanel du body
+    public void playerCreation() //rempli le JPanel du body
     {
         this.body = new JPanel();
         this.body.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -108,8 +106,8 @@ public class PlayersCreation extends JFrame implements ActionListener
         {
             this.footer.add(this.bfinish);
         }
-        this.bvalid.addMouseListener(new mousePlayersCreation());
-        this.bfinish.addActionListener(this);
+        this.bvalid.addMouseListener(new mousePlayersCreation(this));
+        this.bfinish.addMouseListener(new mousePlayersCreation(this));
         
         this.getContentPane().add(title, BorderLayout.NORTH);
         this.getContentPane().add(body, BorderLayout.CENTER);
@@ -217,6 +215,12 @@ public class PlayersCreation extends JFrame implements ActionListener
 	public JComboBox getDay() {
 		return day;
 	}
+        
+        public JRadioButton getComputer()
+        {
+            return this.computer;
+        }
+
 
 	public JComboBox getMonth() {
 		return month;
@@ -228,6 +232,10 @@ public class PlayersCreation extends JFrame implements ActionListener
 
 	public JButton getBvalid() {
 		return bvalid;
+	}
+        
+        public JButton getBfinish() {
+		return bfinish;
 	}
 
 	public void setJour(int jour) {

@@ -1,5 +1,6 @@
 package game.ihm.events;
 
+import game.ihm.graphic.GameChoice;
 import game.ihm.graphic.PlayersCreation;
 import game.model.common.player.Computer;
 import game.model.common.player.Human;
@@ -20,25 +21,32 @@ public class mousePlayersCreation implements MouseListener
     @Override
     public void mouseClicked(MouseEvent ae) 
     {
-        if(ae.getSource() == this.pc.bvalid)
+        if(ae.getSource() == this.pc.getBvalid())
         {
-            String lastName = this.name.getText();
-            if (this.computer.isSelected())
+            String lastName = this.pc.getName();
+            if (this.pc.getComputer().isSelected())
             {
-                this.app.getTabPlayers().add(new Computer(lastName));
+                this.pc.getApp().getTabPlayers().add(new Computer(lastName));
+                this.pc.setCpt(this.pc.getCpt()+1);
             }
             else
             {
-                this.jour = (int)this.day.getSelectedItem();
-                this.mois = (int)this.month.getSelectedItem();
-                this.pc.annee = (int)this.pc.year.getSelectedItem();
+                this.pc.setJour((int)this.pc.getDay().getSelectedItem());
+                this.pc.setMois((int)this.pc.getMonth().getSelectedItem());
+                this.pc.setAnnee((int)this.pc.getYear().getSelectedItem());
                 int age = this.pc.AgeCalc();
-                this.app.getTabPlayers().add(new Human(lastName, age));
+                this.pc.getApp().getTabPlayers().add(new Human(lastName, age));
+                this.pc.setCpt(this.pc.getCpt()+1);
             }
-            this.cpt++;
-            this.playerCreation();
-            this.body.revalidate();
-            this.body.repaint();
+            this.pc.playerCreation();
+            this.pc.getBody().revalidate();
+            this.pc.getBody().repaint();
+        }
+        
+        if(ae.getSource() == this.pc.getBfinish())
+        {
+            new GameChoice(this.pc.getApp());
+            this.pc.dispose();
         }
     }
 
