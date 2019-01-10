@@ -196,7 +196,51 @@ public class PlayersCreation extends JFrame implements ActionListener
                 this.body.repaint();
             }
         }
-    } 
+    }
+
+	public int getCpt() {
+		return cpt;
+	}
+
+	public void setCpt(int cpt) {
+		this.cpt = cpt;
+	}
+
+	public App getApp() {
+		return app;
+	}
+
+	public JPanel getBody() {
+		return body;
+	}
+
+	public JComboBox getDay() {
+		return day;
+	}
+
+	public JComboBox getMonth() {
+		return month;
+	}
+
+	public JComboBox getYear() {
+		return year;
+	}
+
+	public JButton getBvalid() {
+		return bvalid;
+	}
+
+	public void setJour(int jour) {
+		this.jour = jour;
+	}
+
+	public void setMois(int mois) {
+		this.mois = mois;
+	}
+
+	public void setAnnee(int annee) {
+		this.annee = annee;
+	} 
     
     
 }
