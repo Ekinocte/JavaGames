@@ -35,6 +35,6 @@ public class Human extends Player
     @Override
     public String toString()
     {
-        return "lastName : " + this.lastName + " Humain " + "Age : " + this.age;
+        return "Player : " + this.lastName + ", Humain, " + "Age : " + this.age;
     }
 }

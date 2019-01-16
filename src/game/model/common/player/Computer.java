@@ -20,7 +20,7 @@ public class Computer extends Player
     @Override
     public String toString()
     {
-        return "lastName : " + this.lastName + " Computer";
+        return "Player : " + this.lastName + ", Computer";
     }
     
 }
