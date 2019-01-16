@@ -89,8 +89,8 @@ public class GameChoice extends JFrame implements ActionListener{
 		this.libNbMatches = new JLabel("Total of matches:");
 		this.libNbMatchesTaken = new JLabel("Matches taken by round:");
 		
-		this.lastMatcheLose = new JRadioButton("Last matche lose");
-		this.lastMatcheWin = new JRadioButton("Last matche win");
+		this.lastMatcheLose = new JRadioButton("Last match lose");
+		this.lastMatcheWin = new JRadioButton("Last match win");
 		this.type = new ButtonGroup();
 		this.lastMatcheLose.setSelected(true);
 		this.type.add(this.lastMatcheLose);
