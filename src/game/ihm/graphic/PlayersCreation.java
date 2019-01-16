@@ -34,7 +34,6 @@ public final class PlayersCreation extends JFrame implements ActionListener
     private JRadioButton human;
     private JRadioButton computer;
     private JTextField name;
-    private String lastName;
     private JLabel birthdateTitle;
     
     private JPanel birthdateYear;
@@ -93,7 +92,6 @@ public final class PlayersCreation extends JFrame implements ActionListener
         this.body.add(this.computer);
 
         this.name = new JTextField("Name");
-        this.lastName = this.name.getText();
         this.body.add(this.name);
         this.name.setMaximumSize(new Dimension(150,30));
         
@@ -195,11 +193,6 @@ public final class PlayersCreation extends JFrame implements ActionListener
     }
     
     /*------------------- Getters and Setters ---------------*/
-    
-    public String getLastName()
-    {
-        return this.lastName;
-    }
 
     public App getApp() {
         return app;
@@ -247,5 +240,7 @@ public final class PlayersCreation extends JFrame implements ActionListener
         this.annee = annee;
     } 
     
-    
+    public JTextField getPlayerName() {
+        return this.name;
+    }
 }

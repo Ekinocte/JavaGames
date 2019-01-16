@@ -24,7 +24,7 @@ public class mousePlayersCreation implements MouseListener
     {
         if(ae.getSource() == this.pc.getBvalid())
         {
-            String lastName = this.pc.getLastName();
+            String lastName = this.pc.getPlayerName().getText();
             if (this.pc.getComputer().isSelected())
             {
                 this.pc.getApp().getTabPlayers().add(new Computer(lastName));
