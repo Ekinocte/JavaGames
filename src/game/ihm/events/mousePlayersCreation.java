@@ -6,6 +6,7 @@ import game.model.common.player.Computer;
 import game.model.common.player.Human;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JFrame;
 
 /**
  *
@@ -21,13 +22,13 @@ public class mousePlayersCreation implements MouseListener
     @Override
     public void mouseClicked(MouseEvent ae) 
     {
+        System.out.print(ae.getSource());
         if(ae.getSource() == this.pc.getBvalid())
         {
-            String lastName = this.pc.getName();
+            String lastName = this.pc.getLastName();
             if (this.pc.getComputer().isSelected())
             {
                 this.pc.getApp().getTabPlayers().add(new Computer(lastName));
-                this.pc.setCpt(this.pc.getCpt()+1);
             }
             else
             {
@@ -36,16 +37,21 @@ public class mousePlayersCreation implements MouseListener
                 this.pc.setAnnee((int)this.pc.getYear().getSelectedItem());
                 int age = this.pc.AgeCalc();
                 this.pc.getApp().getTabPlayers().add(new Human(lastName, age));
-                this.pc.setCpt(this.pc.getCpt()+1);
             }
-            this.pc.playerCreation();
-            this.pc.getBody().revalidate();
+            System.out.println(lastName);
+            this.pc.playerCreationBody();
             this.pc.getBody().repaint();
+            this.pc.getBody().revalidate();
+            
         }
         
         if(ae.getSource() == this.pc.getBfinish())
         {
-            new GameChoice(this.pc.getApp());
+            GameChoice gc = new GameChoice(this.pc.getApp());
+            gc.pack();
+            gc.setLocationRelativeTo(null);
+            gc.setVisible(true);
+            gc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.pc.dispose();
         }
     }

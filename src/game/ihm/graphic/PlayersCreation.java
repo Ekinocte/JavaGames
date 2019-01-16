@@ -22,61 +22,60 @@ import game.model.common.App;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class PlayersCreation extends JFrame implements ActionListener
+public final class PlayersCreation extends JFrame implements ActionListener
 {
-    private App app;
+    private final App app = new App();
 
-    private final JLabel title; 
-
+    private JLabel title; 
     private JPanel body;
     private JLabel titleBody;
+    
     private ButtonGroup playerType;
     private JRadioButton human;
     private JRadioButton computer;
     private JTextField name;
+    private String lastName;
     private JLabel birthdateTitle;
     
     private JPanel birthdateYear;
     private JComboBox day;
     private JComboBox month;
     private JComboBox year;
-
+    private int jour;
+    private int mois;
+    private int annee;
+    
     private JPanel footer;
     private JButton bvalid;
     private JButton bfinish;
     
-    private int jour;
-    private int mois;
-    protected int annee;
-
-    private int cpt=1; //nb players.
+    
     
     public PlayersCreation() 
     {
-        this.setPreferredSize(new Dimension(600, 600));// a enlever
+        this.setPreferredSize(new Dimension(600, 600));// to delete
 
-        this.app = new App();
-
+        this.playerCreationTitle();
+        this.playerCreationBody();
+        this.playerCreationFooter();
+    }
+    
+    public void playerCreationTitle()
+    {
         this.title = new JLabel("Player creation");
         this.title.setHorizontalAlignment(JLabel.CENTER);
-
-        this.footer = new JPanel();
-        this.bvalid = new JButton("Create & next player");
-        this.bfinish = new JButton("Terminate");
-
-        this.footer.add(this.bvalid);
-        this.playerCreation();
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().add(title, BorderLayout.NORTH);
     }
 
-    public void playerCreation() //rempli le JPanel du body
+    public void playerCreationBody()
     {
+        if (this.body != null)
+        {
+            this.remove(this.body);
+        }
         this.body = new JPanel();
         this.body.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.titleBody = new JLabel("Player "+this.cpt);
+        this.titleBody = new JLabel("Player "+(this.app.getTabPlayers().size()+1));
         this.body.setLayout(new BoxLayout(this.body, BoxLayout.Y_AXIS));
         this.body.add("Center",this.titleBody);
 
@@ -94,6 +93,7 @@ public class PlayersCreation extends JFrame implements ActionListener
         this.body.add(this.computer);
 
         this.name = new JTextField("Name");
+        this.lastName = this.name.getText();
         this.body.add(this.name);
         this.name.setMaximumSize(new Dimension(150,30));
         
@@ -102,26 +102,24 @@ public class PlayersCreation extends JFrame implements ActionListener
         this.human.addActionListener(this);
         
         // Avatar in comming
-        if (this.app.getTabPlayers().size() >=2)
+        this.getContentPane().add(body, BorderLayout.CENTER);
+        
+        if (this.app.getTabPlayers().size() ==2)
         {
             this.footer.add(this.bfinish);
         }
+    }
+    
+    public void playerCreationFooter()
+    {
+        this.footer = new JPanel();
+        this.bvalid = new JButton("Create & next player");
+        this.bfinish = new JButton("Terminate");
+
+        this.footer.add(this.bvalid);
+        this.getContentPane().add(footer, BorderLayout.SOUTH);
         this.bvalid.addMouseListener(new mousePlayersCreation(this));
         this.bfinish.addMouseListener(new mousePlayersCreation(this));
-        
-        this.getContentPane().add(title, BorderLayout.NORTH);
-        this.getContentPane().add(body, BorderLayout.CENTER);
-        this.getContentPane().add(footer, BorderLayout.SOUTH);
-    }
-
-    public int getPlayerNumber() 
-    {
-        int n = 1;
-        if(!this.app.getTabPlayers().isEmpty()) 
-        {
-            n = this.app.getTabPlayers().size()+1;
-        }
-        return n;
     }
     
     /*--------------  age calcul ---------------------*/
@@ -195,60 +193,59 @@ public class PlayersCreation extends JFrame implements ActionListener
             }
         }
     }
+    
+    /*------------------- Getters and Setters ---------------*/
+    
+    public String getLastName()
+    {
+        return this.lastName;
+    }
 
-	public int getCpt() {
-		return cpt;
-	}
+    public App getApp() {
+        return app;
+    }
 
-	public void setCpt(int cpt) {
-		this.cpt = cpt;
-	}
+    public JPanel getBody() {
+        return body;
+    }
 
-	public App getApp() {
-		return app;
-	}
+    public JComboBox getDay() {
+        return day;
+    }
 
-	public JPanel getBody() {
-		return body;
-	}
-
-	public JComboBox getDay() {
-		return day;
-	}
-        
-        public JRadioButton getComputer()
-        {
-            return this.computer;
-        }
+    public JRadioButton getComputer()
+    {
+    return this.computer;
+    }
 
 
-	public JComboBox getMonth() {
-		return month;
-	}
+    public JComboBox getMonth() {
+        return month;
+    }
 
-	public JComboBox getYear() {
-		return year;
-	}
+    public JComboBox getYear() {
+        return year;
+    }
 
-	public JButton getBvalid() {
-		return bvalid;
-	}
-        
-        public JButton getBfinish() {
-		return bfinish;
-	}
+    public JButton getBvalid() {
+        return bvalid;
+    }
 
-	public void setJour(int jour) {
-		this.jour = jour;
-	}
+    public JButton getBfinish() {
+        return bfinish;
+    }
 
-	public void setMois(int mois) {
-		this.mois = mois;
-	}
+    public void setJour(int jour) {
+        this.jour = jour;
+    }
 
-	public void setAnnee(int annee) {
-		this.annee = annee;
-	} 
+    public void setMois(int mois) {
+        this.mois = mois;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
+    } 
     
     
 }
