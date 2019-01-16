@@ -19,6 +19,7 @@ import javax.swing.JTextPane;
 
 import game.model.common.App;
 import game.model.common.player.Player;
+import game.model.nim.Nim;
 
 public class PlayersChoice extends JFrame implements ActionListener{
 	
@@ -51,11 +52,6 @@ public class PlayersChoice extends JFrame implements ActionListener{
 		this.getContentPane().add(title, BorderLayout.NORTH);
 		this.getContentPane().add(body, BorderLayout.CENTER);
 		this.getContentPane().add(footer, BorderLayout.SOUTH);
-		
-		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void PlayerChoice() {
@@ -98,11 +94,13 @@ public class PlayersChoice extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent evt) {
 		if(evt.getSource() == this.badd) {
 			if(!this.app.getTabPlayers().isEmpty()) {
-				Player p = (Player)this.playersList.getSelectedItem();
-				this.app.getGameSelected().setPlayerInGame(p);
-				this.body.add(new JLabel("- "+p.toString()));
-				this.body.revalidate();
-				this.body.repaint();
+				if(this.app.getGameSelected().getPlayersInGame().size()<2 && this.app.getGameSelected() instanceof Nim) {
+					Player p = (Player)this.playersList.getSelectedItem();
+					this.app.getGameSelected().setPlayerInGame(p);
+					this.body.add(new JLabel("- "+p.toString()));
+					this.body.revalidate();
+					this.body.repaint();
+				}
 			}
 		}
 	}

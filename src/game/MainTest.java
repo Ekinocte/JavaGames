@@ -1,5 +1,7 @@
 package game;
 
+import javax.swing.JFrame;
+
 import game.ihm.graphic.GameChoice;
 import game.ihm.graphic.PlayersChoice;
 import game.model.common.App;
@@ -28,7 +30,11 @@ public class MainTest {
 		
 		//new PlayersChoice(a);
 		
-		new GameChoice(a);
+		GameChoice gc = new GameChoice(a);
+		gc.pack();
+		gc.setLocationRelativeTo(null);
+		gc.setVisible(true);
+		gc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
