@@ -22,7 +22,6 @@ public class mousePlayersCreation implements MouseListener
     @Override
     public void mouseClicked(MouseEvent ae) 
     {
-        System.out.print(ae.getSource());
         if(ae.getSource() == this.pc.getBvalid())
         {
             String lastName = this.pc.getLastName();
