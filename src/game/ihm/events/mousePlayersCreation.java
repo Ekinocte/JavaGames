@@ -37,7 +37,6 @@ public class mousePlayersCreation implements MouseListener
                 int age = this.pc.AgeCalc();
                 this.pc.getApp().getTabPlayers().add(new Human(lastName, age));
             }
-            System.out.println(lastName);
             this.pc.playerCreationBody();
             this.pc.getBody().repaint();
             this.pc.getBody().revalidate();
