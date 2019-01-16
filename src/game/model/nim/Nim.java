@@ -120,7 +120,7 @@ public class Nim extends Game
     	this.stackHistoric.push(nbMatchesTaken);
     }
     
-    public int commeBack(int nbRoundComeBack)
+    public int comeBack(int nbRoundComeBack)
     {
         int test = 0;
     	//Check that there has been at last one round playing
