@@ -180,7 +180,7 @@ public class Text
                                             {
                                                 System.out.println("number of round to comeback ?");
                                                 nbRoundComeBack = sc.nextInt();
-                                                scannerTest = gameP.commeBack(nbRoundComeBack);
+                                                scannerTest = gameP.comeBack(nbRoundComeBack);
                                             }
                                             cptRound -= nbRoundComeBack;
                                             if (nbRoundComeBack%2 ==0)
