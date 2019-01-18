@@ -43,7 +43,14 @@ public final class NimGame extends JFrame implements ActionListener
         this.menu = new JMenu("Game"); 
         this.menuItem = new JMenuItem("Reset nim");
         this.menu.add(this.menuItem);
+        this.menu.addSeparator();
         this.menuItem = new JMenuItem("Game select");
+        this.menu.add(this.menuItem);
+        this.menu.addSeparator();
+        this.menuItem = new JMenuItem("Change players");
+        this.menu.add(this.menuItem);
+        this.menu.addSeparator();
+        this.menuItem = new JMenuItem("Leave game");
         this.menu.add(this.menuItem);
         
         this.menuBar.add(this.menu);
@@ -51,7 +58,7 @@ public final class NimGame extends JFrame implements ActionListener
         this.menu = new JMenu("Graphic");
         this.menuBar.add(this.menu);
         
-        
+        this.setJMenuBar(this.menuBar);
     }
     
     public void gameZone() {
