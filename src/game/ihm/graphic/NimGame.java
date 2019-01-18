@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 
 public final class NimGame extends JFrame implements ActionListener
 {
+<<<<<<< HEAD
 	private JPanel panelGame;
 	private JPanel panelInfo;
 	private JPanel panelGameZone;
@@ -35,12 +36,16 @@ public final class NimGame extends JFrame implements ActionListener
 	private JPanel panelInfoPlayers;
 	private JPanel panelInfoRules;
     
+=======
+    private App app;
+>>>>>>> 80ea6098e92478a9de05be1aa708b9a4b7aa615f
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem menuItem;
     
     public NimGame(App app)
     {
+        this.app = app;
         this.setPreferredSize(new Dimension(600, 600));// to delete
         
         this.menu();
@@ -54,12 +59,22 @@ public final class NimGame extends JFrame implements ActionListener
         this.menu = new JMenu("Game"); 
         this.menuItem = new JMenuItem("Reset nim");
         this.menu.add(this.menuItem);
+        this.menu.addSeparator();
+        this.menuItem = new JMenuItem("Game select");
+        this.menu.add(this.menuItem);
+        this.menu.addSeparator();
+        this.menuItem = new JMenuItem("Change players");
+        this.menu.add(this.menuItem);
+        this.menu.addSeparator();
+        this.menuItem = new JMenuItem("Leave game");
+        this.menu.add(this.menuItem);
+        
         this.menuBar.add(this.menu);
         
         this.menu = new JMenu("Graphic");
         this.menuBar.add(this.menu);
         
-        
+        this.setJMenuBar(this.menuBar);
     }
     
     public void global() {
