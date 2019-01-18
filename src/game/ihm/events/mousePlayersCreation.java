@@ -46,6 +46,7 @@ public class mousePlayersCreation implements MouseListener
         if(ae.getSource() == this.pc.getBfinish())
         {
             GameChoice gc = new GameChoice(this.pc.getApp());
+            gc.setTitle("Game Choice");
             gc.pack();
             gc.setLocationRelativeTo(null);
             gc.setVisible(true);

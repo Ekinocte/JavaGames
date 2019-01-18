@@ -132,6 +132,7 @@ public class GameChoice extends JFrame implements ActionListener{
 				
 				this.app.setGameSelected(new Nim((int)this.nbMatches.getValue(), (int)this.nbMatchesTaken.getValue(), typeg, histo));
 				PlayersChoice pc = new PlayersChoice(this.app);
+                                pc.setTitle("Players");
 				pc.pack();
 				pc.setLocationRelativeTo(null);
 				pc.setVisible(true);

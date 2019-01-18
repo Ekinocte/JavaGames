@@ -42,6 +42,7 @@ public class Main
         else
         {
             PlayersCreation pc = new PlayersCreation();
+            pc.setTitle("Player Creation");
             pc.pack();
             pc.setLocationRelativeTo(null);
             pc.setVisible(true);

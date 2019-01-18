@@ -61,7 +61,7 @@ public final class PlayersCreation extends JFrame implements ActionListener
     
     public void playerCreationTitle()
     {
-        this.title = new JLabel("Player creation");
+        this.title = new JLabel("New Player");
         this.title.setHorizontalAlignment(JLabel.CENTER);
         this.getContentPane().add(title, BorderLayout.NORTH);
     }
