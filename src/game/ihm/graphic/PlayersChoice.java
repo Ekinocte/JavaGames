@@ -131,10 +131,10 @@ public class PlayersChoice extends JFrame implements ActionListener{
 					this.body.repaint();
 				}
 			}
-			else if(evt.getSource() == this.bvalid)
-			{
-				this.beginChoice();
-			}
+		}
+		else if(evt.getSource() == this.bvalid)
+		{
+			this.beginChoice();
 		}
 	}
 	
