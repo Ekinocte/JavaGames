@@ -29,9 +29,10 @@ public class GameChoice extends JFrame implements ActionListener{
 	private JPanel body;
 	private JButton validGame;
 	private final String[] listGames = {"Nim"};
-	private JPanel rules;//affiche les formulaire en fonction du jeu selctionner
+	private JPanel rules;
+        //Display forms in function of game selected
 	
-	//----------Nimm-----------------------------------------------------------
+	//----------Nim-----------------------------------------------------------
 	private JLabel libHisto;
 	private ButtonGroup historic;
     private JRadioButton histoTrue;
