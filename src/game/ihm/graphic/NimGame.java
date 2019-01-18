@@ -6,6 +6,8 @@
 package game.ihm.graphic;
 
 import game.model.common.App;
+
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,6 +25,15 @@ import javax.swing.JMenuItem;
 
 public final class NimGame extends JFrame implements ActionListener
 {
+	private JPanel panelGame;
+	private JPanel panelInfo;
+	private JPanel panelGameZone;
+	private JPanel panelGamePlay;
+	private JPanel panelGameBoard;
+	private JPanel panelEnd;
+	private JPanel panelHisto;
+	private JPanel panelInfoPlayers;
+	private JPanel panelInfoRules;
     
     private JMenuBar menuBar;
     private JMenu menu;
@@ -32,7 +44,7 @@ public final class NimGame extends JFrame implements ActionListener
         this.setPreferredSize(new Dimension(600, 600));// to delete
         
         this.menu();
-
+        this.game();
     }
     
     public void menu()
@@ -50,7 +62,35 @@ public final class NimGame extends JFrame implements ActionListener
         
     }
     
+    public void global() {
+    	this.game();
+    	this.info();
+    }
+    
+    public void game() {
+    	this.panelGame = new JPanel();
+    	this.add(this.panelGame, BorderLayout.CENTER);
+    	this.gameZone();
+    }
+    
     public void gameZone() {
+    	this.panelGameZone = new JPanel();
+    	this.panelGameZone.setLayout(new BorderLayout());
+    	this.gameBoard();
+    	this.gamePlay();
+    }
+    
+    public void gameBoard() {
+    	this.panelGameBoard = new JPanel();
+    	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
+    }
+    
+    public void gamePlay() {
+    	this.panelGamePlay = new JPanel();
+    	this.panelGamePlay.add(this.panelGameBoard, BorderLayout.SOUTH);
+    }
+    
+    public void info() {
     	
     }
     
