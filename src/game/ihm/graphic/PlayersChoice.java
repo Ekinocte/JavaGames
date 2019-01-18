@@ -9,21 +9,30 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 
 import game.model.common.App;
+import game.model.common.player.Human;
 import game.model.common.player.Player;
 import game.model.nim.Nim;
 
 public class PlayersChoice extends JFrame implements ActionListener{
 	
 	private App app;
+	
+	private JLabel titleBegin;
+	private ButtonGroup bBeginChoice;
+	private JRadioButton bYear;
+	private JRadioButton bRandom;
+	private JRadioButton bName;
 	
 	private JLabel title;
 	private JPanel body;
@@ -38,6 +47,17 @@ public class PlayersChoice extends JFrame implements ActionListener{
 	public PlayersChoice (App app) {
 		this.app = app;
 		this.setPreferredSize(new Dimension(600, 600));
+		
+		this.titleBegin = new JLabel("Beginer method choice");
+		this.titleBegin.setHorizontalAlignment(JLabel.CENTER);
+		this.bBeginChoice = new ButtonGroup();
+		this.bName = new JRadioButton("By name");
+		this.bYear = new JRadioButton("By year");
+		this.bRandom = new JRadioButton("Random");
+		this.bBeginChoice.add(this.bName);
+		this.bBeginChoice.add(this.bYear);
+		this.bBeginChoice.add(this.bRandom);
+		this.bRandom.setSelected(true);
 		
 		this.title = new JLabel("Who is playing?");
 		this.title.setHorizontalAlignment(JLabel.CENTER);
@@ -79,10 +99,15 @@ public class PlayersChoice extends JFrame implements ActionListener{
 		
 		ArrayList<Player> inG = this.app.getGameSelected().getPlayersInGame();
 		
+		this.body.add(this.titleBegin);
+		this.body.add(this.bRandom);
+		this.body.add(this.bName);
+		this.body.add(this.bYear);
 		this.body.add(this.titleBody);
 		this.body.add(this.playersList);
 		this.body.add(this.badd);
 		this.body.add(this.labelList);
+		
 		if(!inG.isEmpty()) {
                     for(Player p : inG) {
                             this.body.add(new JLabel("- "+p.toString()));
@@ -91,17 +116,56 @@ public class PlayersChoice extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent evt) {
-		if(evt.getSource() == this.badd) {
-			if(!this.app.getTabPlayers().isEmpty()) {
+	public void actionPerformed(ActionEvent evt) 
+	{
+		if(evt.getSource() == this.badd) 
+		{
+			if(!this.app.getTabPlayers().isEmpty()) 
+			{
 				if(this.app.getGameSelected().getPlayersInGame().size()<2 && this.app.getGameSelected() instanceof Nim) {
 					Player p = (Player)this.playersList.getSelectedItem();
 					this.app.getGameSelected().setPlayerInGame(p);
 					this.body.add(new JLabel("- "+p.toString()));
+					
 					this.body.revalidate();
 					this.body.repaint();
 				}
 			}
+			else if(evt.getSource() == this.bvalid)
+			{
+				this.beginChoice();
+			}
+		}
+	}
+	
+	public boolean onlyComputer() {
+		Boolean res = true;
+			
+		for(Player p: this.app.getGameSelected().getPlayersInGame())
+		{
+			if(p instanceof Human)
+			{
+				res = false;
+			}
+		}
+		return res;
+	}
+	
+	public void beginChoice() {
+		if(this.bName.isSelected()) 
+		{
+			System.out.println("name");
+			this.app.getGameSelected().lastNameSelectBegginer();
+		}
+		else if(this.bYear.isSelected() && !this.onlyComputer())
+		{
+			System.out.println("year");
+			this.app.getGameSelected().youngerSelectBegginer();
+		}
+		else 
+		{
+			System.out.println("ramdom");
+			this.app.getGameSelected().randomSelectBegginer();
 		}
 	}
 }
