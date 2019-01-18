@@ -22,13 +22,14 @@ import javax.swing.JMenuItem;
 
 public final class NimGame extends JFrame implements ActionListener
 {
-    
+    private App app;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem menuItem;
     
     public NimGame(App app)
     {
+        this.app = app;
         this.setPreferredSize(new Dimension(600, 600));// to delete
         
         this.menu();
@@ -42,6 +43,9 @@ public final class NimGame extends JFrame implements ActionListener
         this.menu = new JMenu("Game"); 
         this.menuItem = new JMenuItem("Reset nim");
         this.menu.add(this.menuItem);
+        this.menuItem = new JMenuItem("Game select");
+        this.menu.add(this.menuItem);
+        
         this.menuBar.add(this.menu);
         
         this.menu = new JMenu("Graphic");
