@@ -12,18 +12,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
  * @author Florian et Guillaume
  */
 
-public class NimGame extends JFrame implements ActionListener
+public final class NimGame extends JFrame implements ActionListener
 {
     
     private JMenuBar menuBar;
     private JMenu menu;
-    
+    private JMenuItem menuItem;
     
     public NimGame()
     {
@@ -38,6 +39,8 @@ public class NimGame extends JFrame implements ActionListener
         this.menuBar = new JMenuBar();
         
         this.menu = new JMenu("Game"); 
+        this.menuItem = new JMenuItem("Reset nim");
+        this.menu.add(this.menuItem);
         this.menuBar.add(this.menu);
         
         this.menu = new JMenu("Graphic");
