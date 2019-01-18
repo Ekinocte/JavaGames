@@ -5,6 +5,7 @@
  */
 package game.ihm.graphic;
 
+import game.model.common.App;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,7 @@ public final class NimGame extends JFrame implements ActionListener
     private JMenu menu;
     private JMenuItem menuItem;
     
-    public NimGame()
+    public NimGame(App app)
     {
         this.setPreferredSize(new Dimension(600, 600));// to delete
         
