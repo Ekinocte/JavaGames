@@ -66,6 +66,7 @@ public class PlayersChoice extends JFrame implements ActionListener{
 		
 		this.footer = new JPanel();
 		this.bvalid = new JButton("Next");
+		this.bvalid.addActionListener(this);
 		
 		this.footer.add(this.bvalid);
 		
@@ -135,6 +136,13 @@ public class PlayersChoice extends JFrame implements ActionListener{
 		else if(evt.getSource() == this.bvalid)
 		{
 			this.beginChoice();
+			NimGame ng = new NimGame(this.app);
+			ng.setTitle("Nim");
+			ng.pack();
+			ng.setLocationRelativeTo(null);
+			ng.setVisible(true);
+			ng.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			this.dispose();
 		}
 	}
 	
