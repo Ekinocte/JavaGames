@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  */
 public class mousePlayersCreation implements MouseListener
 {
-    private PlayersCreation pc;
+    private final PlayersCreation pc;
     public mousePlayersCreation(PlayersCreation pc)
     {
         this.pc = pc;
@@ -40,7 +40,6 @@ public class mousePlayersCreation implements MouseListener
             this.pc.playerCreationBody();
             this.pc.getBody().repaint();
             this.pc.getBody().revalidate();
-            
         }
         
         if(ae.getSource() == this.pc.getBfinish())

@@ -5,6 +5,7 @@
  */
 package game.ihm.graphic;
 
+import game.ihm.events.mouseNimMenu;
 import game.model.common.App;
 
 import java.awt.BorderLayout;
@@ -40,7 +41,11 @@ public final class NimGame extends JFrame implements ActionListener
 
     private JMenuBar menuBar;
     private JMenu menu;
-    private JMenuItem menuItem;
+    private JMenuItem menuItemReset;
+    private JMenuItem menuItemGameSelect;
+    private JMenuItem menuItemChangePlayers;
+    private JMenuItem menuItemLeave;
+
 
     public NimGame(App app)
     {
@@ -56,18 +61,21 @@ public final class NimGame extends JFrame implements ActionListener
         this.menuBar = new JMenuBar();
 
         this.menu = new JMenu("Game");
-        this.menuItem = new JMenuItem("Reset nim");
-        this.menu.add(this.menuItem);
+        this.menuItemReset = new JMenuItem("Reset nim");
+        this.menuItemReset.addMouseListener(new mouseNimMenu(this));
+        this.menu.add(this.menuItemReset);
         this.menu.addSeparator();
-        this.menuItem = new JMenuItem("Game select");
-        this.menu.add(this.menuItem);
+        this.menuItemGameSelect = new JMenuItem("Game select");
+        this.menuItemGameSelect.addMouseListener(new mouseNimMenu(this));
+        this.menu.add(this.menuItemGameSelect);
         this.menu.addSeparator();
-        this.menuItem = new JMenuItem("Change players");
-        this.menu.add(this.menuItem);
+        this.menuItemChangePlayers = new JMenuItem("Change players");
+        this.menuItemChangePlayers.addMouseListener(new mouseNimMenu(this));        
+        this.menu.add(this.menuItemChangePlayers);
         this.menu.addSeparator();
-        this.menuItem = new JMenuItem("Leave game");
-        this.menu.add(this.menuItem);
-
+        this.menuItemLeave = new JMenuItem("Leave game");
+        this.menuItemLeave.addMouseListener(new mouseNimMenu(this));
+        this.menu.add(this.menuItemLeave);
         this.menuBar.add(this.menu);
 
         this.menu = new JMenu("Graphic");
@@ -116,4 +124,28 @@ public final class NimGame extends JFrame implements ActionListener
 
     /*------------------- Getters and Setters ---------------*/
 
+    public App getApp() 
+    {
+        return this.app;
+    }
+    
+    public JMenuItem getMenuItemReset() 
+    {
+        return this.menuItemReset;
+    }
+
+    public JMenuItem getMenuItemGameSelect() 
+    {
+        return this.menuItemGameSelect;
+    }
+
+    public JMenuItem getMenuItemChangePlayers() 
+    {
+        return this.menuItemChangePlayers;
+    }
+
+    public JMenuItem getMenuItemLeave() 
+    {
+        return this.menuItemLeave;
+    }
 }

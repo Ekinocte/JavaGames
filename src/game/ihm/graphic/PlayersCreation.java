@@ -168,7 +168,7 @@ public final class PlayersCreation extends JFrame implements ActionListener
         }
         return res;
     }
-    /*------------ Events Listeners -----------------*/
+    /*-------------------- Events Listeners -----------------*/
     
     @Override
     public void actionPerformed(ActionEvent ae) 
@@ -195,15 +195,15 @@ public final class PlayersCreation extends JFrame implements ActionListener
     /*------------------- Getters and Setters ---------------*/
 
     public App getApp() {
-        return app;
+        return this.app;
     }
 
     public JPanel getBody() {
-        return body;
+        return this.body;
     }
 
     public JComboBox getDay() {
-        return day;
+        return this.day;
     }
 
     public JRadioButton getComputer()
@@ -213,19 +213,19 @@ public final class PlayersCreation extends JFrame implements ActionListener
 
 
     public JComboBox getMonth() {
-        return month;
+        return this.month;
     }
 
     public JComboBox getYear() {
-        return year;
+        return this.year;
     }
 
     public JButton getBvalid() {
-        return bvalid;
+        return this.bvalid;
     }
 
     public JButton getBfinish() {
-        return bfinish;
+        return this.bfinish;
     }
 
     public void setJour(int jour) {
