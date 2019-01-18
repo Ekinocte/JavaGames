@@ -50,6 +50,10 @@ public final class NimGame extends JFrame implements ActionListener
         
     }
     
+    public void gameZone() {
+    	
+    }
+    
     /*------------------ Events Listeners ---------------------------*/
     @Override
     public void actionPerformed(ActionEvent ae) {
