@@ -10,10 +10,13 @@ import game.model.common.player.Player;
 import game.model.nim.Nim;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -98,7 +101,7 @@ public final class NimGame extends JFrame implements ActionListener
     {
     	this.panelGameZone = new JPanel();
     	this.panelGameZone.setLayout(new BorderLayout());
-    	this.add(this.panelGameZone, BorderLayout.CENTER);
+    	this.getContentPane().add(this.panelGameZone, BorderLayout.CENTER);
     	this.gameBoard();
     	this.gamePlay();
     }
@@ -107,50 +110,63 @@ public final class NimGame extends JFrame implements ActionListener
     {
     	this.panelInfo = new JPanel();
     	this.panelInfo.setLayout(new BorderLayout());
-    	this.add(this.panelInfo, BorderLayout.EAST);
+    	this.getContentPane().add(this.panelInfo, BorderLayout.EAST);
+    	this.infoPlayers();
+    	this.infoRules();
     }
 
     public void gameBoard() 
     {
     	this.panelGameBoard = new JPanel();
     	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
+    	this.panelGameBoard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
     public void gamePlay() 
     {
     	this.panelGamePlay = new JPanel();
     	this.panelGameZone.add(this.panelGamePlay, BorderLayout.SOUTH);
+    	this.end();
+    	this.histo();
     }
     
     public void infoPlayers() 
     {
     	this.panelInfoPlayers = new JPanel();
+    	this.panelInfoPlayers.setLayout(new BoxLayout(this.panelInfoPlayers, BoxLayout.Y_AXIS));
     	this.listPlayers();
     	this.panelInfo.add(this.panelInfoPlayers, BorderLayout.NORTH);
+    	this.panelInfoPlayers.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
     public void infoRules() 
     {
     	this.panelInfoRules = new JPanel();
     	this.panelInfo.add(this.panelInfoRules, BorderLayout.SOUTH);
+    	this.panelInfoRules.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
     public void end() 
     {
     	this.panelEnd = new JPanel();
     	this.panelGamePlay.add(this.panelEnd, BorderLayout.EAST);
+    	this.panelEnd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
     public void histo()
     {
     	this.panelHisto = new JPanel();
     	this.panelGamePlay.add(this.panelHisto, BorderLayout.WEST);
+    	this.panelHisto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
     public void listPlayers() {
     	for(Player p : this.app.getGameSelected().getPlayersInGame())
     	{
-    		this.panelInfoPlayers.add(new JLabel(p.toString() + " Win: " + p.getCptGameWin()));
+    		this.panelInfoPlayers.add(new JLabel(p.toString()));
+    		this.panelInfoPlayers.add(new JLabel(" Win: " + p.getCptGameWin()));
+    		this.panelInfoPlayers.add(new JLabel(" Games played: " + p.getCptGamePlayed()));
+    		this.panelInfoPlayers.add(new JLabel(" \n \n "));
     	}
     }
 

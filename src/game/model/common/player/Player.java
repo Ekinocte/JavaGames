@@ -43,12 +43,12 @@ public class Player
         this.cptGameWin = cptGameWin;
     }
     
-    public int getCptGamePlayer()
+    public int getCptGamePlayed()
     {
         return this.cptGamePlayed;
     }
     
-    public void setCptGamePlayer(int cptGamePlayed)
+    public void setCptGamePlayed(int cptGamePlayed)
     {
         this.cptGamePlayed = cptGamePlayed;
     }
