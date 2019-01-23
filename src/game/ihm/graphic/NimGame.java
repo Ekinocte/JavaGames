@@ -6,6 +6,7 @@
 package game.ihm.graphic;
 
 import game.model.common.App;
+import game.model.common.player.Player;
 import game.model.nim.Nim;
 
 import java.awt.BorderLayout;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -27,17 +29,20 @@ import javax.swing.JPanel;
 
 public final class NimGame extends JFrame implements ActionListener
 {
-
-	private JPanel panelGame;
-	private JPanel panelInfo;
+//--------------------------------------------
 	private JPanel panelGameZone;
+	private JPanel panelInfo;
+	
 	private JPanel panelGamePlay;
 	private JPanel panelGameBoard;
-	private JPanel panelEnd;
-	private JPanel panelHisto;
+	
 	private JPanel panelInfoPlayers;
 	private JPanel panelInfoRules;
-
+	
+	private JPanel panelEnd;
+	private JPanel panelHisto;
+//---------------------------------------------
+	
     private App app;
 
     private JMenuBar bar;
@@ -56,7 +61,8 @@ public final class NimGame extends JFrame implements ActionListener
         this.setPreferredSize(new Dimension(600, 600));// to delete
 
         this.menu();
-        this.game();
+        this.gameZone();
+        this.info();
     }
 
     public void menu()
@@ -85,36 +91,64 @@ public final class NimGame extends JFrame implements ActionListener
 
     }
 
-    public void global() {
-    	this.game();
-    	this.info();
-    }
-
-    public void game() {
-    	this.panelGame = new JPanel();
-    	this.add(this.panelGame, BorderLayout.CENTER);
-    	this.gameZone();
-    }
-
-    public void gameZone() {
+    public void gameZone() 
+    {
     	this.panelGameZone = new JPanel();
     	this.panelGameZone.setLayout(new BorderLayout());
+    	this.add(this.panelGameZone, BorderLayout.CENTER);
     	this.gameBoard();
     	this.gamePlay();
     }
+    
+    public void info() 
+    {
+    	this.panelInfo = new JPanel();
+    	this.panelInfo.setLayout(new BorderLayout());
+    	this.add(this.panelInfo, BorderLayout.EAST);
+    }
 
-    public void gameBoard() {
+    public void gameBoard() 
+    {
     	this.panelGameBoard = new JPanel();
     	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
     }
 
-    public void gamePlay() {
+    public void gamePlay() 
+    {
     	this.panelGamePlay = new JPanel();
-    	this.panelGamePlay.add(this.panelGameBoard, BorderLayout.SOUTH);
+    	this.panelGameZone.add(this.panelGamePlay, BorderLayout.SOUTH);
     }
-
-    public void info() {
-
+    
+    public void infoPlayers() 
+    {
+    	this.panelInfoPlayers = new JPanel();
+    	this.listPlayers();
+    	this.panelInfo.add(this.panelInfoPlayers, BorderLayout.NORTH);
+    }
+    
+    public void infoRules() 
+    {
+    	this.panelInfoRules = new JPanel();
+    	this.panelInfo.add(this.panelInfoRules, BorderLayout.SOUTH);
+    }
+    
+    public void end() 
+    {
+    	this.panelEnd = new JPanel();
+    	this.panelGamePlay.add(this.panelEnd, BorderLayout.EAST);
+    }
+    
+    public void histo()
+    {
+    	this.panelHisto = new JPanel();
+    	this.panelGamePlay.add(this.panelHisto, BorderLayout.WEST);
+    }
+    
+    public void listPlayers() {
+    	for(Player p : this.app.getGameSelected().getPlayersInGame())
+    	{
+    		this.panelInfoPlayers.add(new JLabel(p.toString() + " Win: " + p.getCptGameWin()));
+    	}
     }
 
     /*------------------ Events Listeners ---------------------------*/
