@@ -123,7 +123,7 @@ public class GameChoice extends JFrame implements ActionListener{
 				Boolean histo = true;
 				boolean typeg = true;
 				if(this.lastMatcheLose.isSelected()) {
-					histo = false;
+					typeg = false;
 				}
 				
 				if(this.histoFalse.isSelected()) {

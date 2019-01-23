@@ -142,8 +142,10 @@ public final class NimGame extends JFrame implements ActionListener
     public void infoRules() 
     {
     	this.panelInfoRules = new JPanel();
-    	this.panelInfo.add(this.panelInfoRules, BorderLayout.SOUTH);
+    	this.panelInfoRules.setLayout(new BoxLayout(this.panelInfoRules, BoxLayout.Y_AXIS));
+    	this.panelInfo.add(this.panelInfoRules, BorderLayout.CENTER);
     	this.panelInfoRules.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    	this.listrules();
     }
     
     public void end() 
@@ -160,13 +162,28 @@ public final class NimGame extends JFrame implements ActionListener
     	this.panelHisto.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
-    public void listPlayers() {
+    public void listPlayers() 
+    {
     	for(Player p : this.app.getGameSelected().getPlayersInGame())
     	{
-    		this.panelInfoPlayers.add(new JLabel(p.toString()));
+    		this.panelInfoPlayers.add(new JLabel("\n"+p.toString()));
     		this.panelInfoPlayers.add(new JLabel(" Win: " + p.getCptGameWin()));
     		this.panelInfoPlayers.add(new JLabel(" Games played: " + p.getCptGamePlayed()));
     		this.panelInfoPlayers.add(new JLabel(" \n \n "));
+    	}
+    }
+    
+    public void listrules() 
+    {
+    	Nim n = (Nim)this.app.getGameSelected();
+    	this.panelInfoRules.add(new JLabel("\n Historic: "+n.isHistoric()));
+    	if(n.getLastObjectTakenWin()) 
+    	{
+    		this.panelInfoRules.add(new JLabel("Game rule: last matches taken win"));
+    	}
+    	else
+    	{
+    		this.panelInfoRules.add(new JLabel("Game rule: last matches taken lose"));
     	}
     }
 
