@@ -168,6 +168,11 @@ public final class NimGame extends JFrame implements ActionListener
     public void end() 
     {
     	this.panelEnd = new JPanel();
+    	this.panelEnd.setLayout(new BorderLayout());
+    	
+    	this.bEnd = new JButton("End round");
+    	this.cbMatchesTaken = new JComboBox();
+    	
     	this.panelGamePlay.add(this.panelEnd, BorderLayout.EAST);
     	this.panelEnd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
