@@ -172,7 +172,17 @@ public final class NimGame extends JFrame implements ActionListener
     	this.panelEnd.setLayout(new BorderLayout());
     	
     	this.bEnd = new JButton("End round");
+    	this.bEnd.addActionListener(this);
     	this.cbMatchesTaken = new JComboBox();
+    	
+    	Nim n = (Nim)this.app.getGameSelected();
+    	for(int i = 2; i<=n.getCptTakeMatches(); i++)
+    	{
+    		this.cbMatchesTaken.addItem(i);
+    	}
+    	
+    	this.panelEnd.add(this.cbMatchesTaken, BorderLayout.WEST);
+    	this.panelEnd.add(this.bEnd, BorderLayout.EAST);
     	
     	this.panelGamePlay.add(this.panelEnd, BorderLayout.EAST);
     	this.panelEnd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -277,6 +287,12 @@ public final class NimGame extends JFrame implements ActionListener
             c.setVisible(true);
             c.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
+        }
+        
+        if(ae.getSource() == this.bEnd) 
+        {
+        	int i = (int) this.cbMatchesTaken.getSelectedItem();
+        	((Nim)this.app.getGameSelected()).takeMatches(i);
         }
     }
     
