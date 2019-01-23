@@ -19,6 +19,7 @@ import game.model.common.player.Player;
 public class Nim extends Game
 {
     private int cptMatches; // cptMaches = N
+    private int cptMatchesBase; //We stock the number of matches for ihm (resetGame).
     private int cptTakeMatches; // cptTakeMatches = K
     private boolean lastObjectTakenWin; // lastObjectTaken = V
     private boolean historic;
@@ -34,6 +35,7 @@ public class Nim extends Game
     {
     	super(2); // à voir avec la prof. this.maxPlayers
         this.cptMatches = cptMatches;
+        this.cptMatchesBase = cptMatches;
         this.cptTakeMatches = cptTakeMatches;
         this.lastObjectTakenWin = lastObjectTakenWin;
         this.historic = historic;
@@ -51,6 +53,11 @@ public class Nim extends Game
     public int getMatches()
     {
         return this.cptMatches;
+    }
+    
+    public int getMatchesBase()
+    {
+        return this.cptMatchesBase;
     }
     
     public void setCptTakeMatches(int cptTakeMatches)

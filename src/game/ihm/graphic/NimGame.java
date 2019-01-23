@@ -5,8 +5,8 @@
  */
 package game.ihm.graphic;
 
-import game.ihm.events.mouseNimMenu;
 import game.model.common.App;
+import game.model.nim.Nim;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -39,7 +40,7 @@ public final class NimGame extends JFrame implements ActionListener
 
     private App app;
 
-    private JMenuBar menuBar;
+    private JMenuBar bar;
     private JMenu menu;
     private JMenuItem menuItemReset;
     private JMenuItem menuItemGameSelect;
@@ -50,6 +51,8 @@ public final class NimGame extends JFrame implements ActionListener
     public NimGame(App app)
     {
         this.app = app;
+        Nim GameP = ((Nim)this.app.getGameSelected());
+        GameP.setMatches(GameP.getMatchesBase());
         this.setPreferredSize(new Dimension(600, 600));// to delete
 
         this.menu();
@@ -58,30 +61,28 @@ public final class NimGame extends JFrame implements ActionListener
 
     public void menu()
     {
-        this.menuBar = new JMenuBar();
+        this.bar = new JMenuBar();
 
         this.menu = new JMenu("Game");
         this.menuItemReset = new JMenuItem("Reset nim");
-        this.menuItemReset.addMouseListener(new mouseNimMenu(this));
+        this.menuItemReset.addActionListener(this);
         this.menu.add(this.menuItemReset);
         this.menu.addSeparator();
         this.menuItemGameSelect = new JMenuItem("Game select");
-        this.menuItemGameSelect.addMouseListener(new mouseNimMenu(this));
         this.menu.add(this.menuItemGameSelect);
         this.menu.addSeparator();
         this.menuItemChangePlayers = new JMenuItem("Change players");
-        this.menuItemChangePlayers.addMouseListener(new mouseNimMenu(this));        
         this.menu.add(this.menuItemChangePlayers);
         this.menu.addSeparator();
         this.menuItemLeave = new JMenuItem("Leave game");
-        this.menuItemLeave.addMouseListener(new mouseNimMenu(this));
         this.menu.add(this.menuItemLeave);
-        this.menuBar.add(this.menu);
+        this.bar.add(this.menu);
 
         this.menu = new JMenu("Graphic");
-        this.menuBar.add(this.menu);
+        this.bar.add(this.menu);
 
-        this.setJMenuBar(this.menuBar);
+        this.setJMenuBar(this.bar);
+
     }
 
     public void global() {
@@ -118,8 +119,24 @@ public final class NimGame extends JFrame implements ActionListener
 
     /*------------------ Events Listeners ---------------------------*/
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent ae) 
+    {
+        if(ae.getSource() == this.menuItemReset)
+        {   
+            JOptionPane jop = new JOptionPane();
+            int option = jop.showConfirmDialog(null, "Do you want to restart the game?",
+                    "Restart game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(option == JOptionPane.OK_OPTION)
+            {
+                NimGame ng2 = new NimGame(this.app);
+                ng2.setTitle("Nim");
+                ng2.pack();                
+                ng2.setLocationRelativeTo(null);
+                ng2.setVisible(true);
+                ng2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            }
+        }    
     }
 
     /*------------------- Getters and Setters ---------------*/
@@ -129,23 +146,4 @@ public final class NimGame extends JFrame implements ActionListener
         return this.app;
     }
     
-    public JMenuItem getMenuItemReset() 
-    {
-        return this.menuItemReset;
-    }
-
-    public JMenuItem getMenuItemGameSelect() 
-    {
-        return this.menuItemGameSelect;
-    }
-
-    public JMenuItem getMenuItemChangePlayers() 
-    {
-        return this.menuItemChangePlayers;
-    }
-
-    public JMenuItem getMenuItemLeave() 
-    {
-        return this.menuItemLeave;
-    }
 }

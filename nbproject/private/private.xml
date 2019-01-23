@@ -6,7 +6,8 @@
             <file>file:/home/sodoxs/Bureau/Java/Projet/GARCIA_DELGADO/src/game/ihm/events/mousePlayersCreation.java</file>
             <file>file:/home/sodoxs/Bureau/Java/Projet/GARCIA_DELGADO/src/game/ihm/graphic/PlayersCreation.java</file>
             <file>file:/home/sodoxs/Bureau/Java/Projet/GARCIA_DELGADO/src/game/ihm/graphic/NimGame.java</file>
-            <file>file:/home/sodoxs/Bureau/Java/Projet/GARCIA_DELGADO/src/game/ihm/events/mouseNimMenu.java</file>
+            <file>file:/home/sodoxs/Bureau/Java/Projet/GARCIA_DELGADO/src/game/Main.java</file>
+            <file>file:/home/sodoxs/Bureau/Java/Projet/GARCIA_DELGADO/src/game/ihm/events/NimMenuListener.java</file>
         </group>
     </open-files>
 </project-private>
