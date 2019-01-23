@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -56,8 +58,10 @@ public final class NimGame extends JFrame implements ActionListener
     private JMenuItem menuItemChangePlayers;
     private JMenuItem menuItemLeave;
     
-    private ArrayList<Character> boardMatches;
     private JLabel boardTitle;
+    
+    private JButton bEnd;
+    private JComboBox cbMatchesTaken;
 
 
     public NimGame(App app)
