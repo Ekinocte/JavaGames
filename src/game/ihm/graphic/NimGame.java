@@ -175,7 +175,7 @@ public final class NimGame extends JFrame implements ActionListener
     	this.cbMatchesTaken = new JComboBox();
     	
     	Nim n = (Nim)this.app.getGameSelected();
-    	for(int i = 2; i<=n.getCptTakeMatches(); i++)
+    	for(int i = 1; i<=n.getCptTakeMatches(); i++)
     	{
     		this.cbMatchesTaken.addItem(i);
     	}
@@ -292,6 +292,10 @@ public final class NimGame extends JFrame implements ActionListener
         {
         	int i = (int) this.cbMatchesTaken.getSelectedItem();
         	((Nim)this.app.getGameSelected()).takeMatches(i);
+        	
+        	this.gameZone();
+        	this.panelGameZone.repaint();
+        	this.panelGameZone.revalidate();
         }
     }
     
