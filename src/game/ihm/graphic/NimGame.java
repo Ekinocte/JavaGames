@@ -69,12 +69,15 @@ public final class NimGame extends JFrame implements ActionListener
         this.menu.add(this.menuItemReset);
         this.menu.addSeparator();
         this.menuItemGameSelect = new JMenuItem("Game select");
+        this.menuItemGameSelect.addActionListener(this);
         this.menu.add(this.menuItemGameSelect);
         this.menu.addSeparator();
         this.menuItemChangePlayers = new JMenuItem("Change players");
+        this.menuItemChangePlayers.addActionListener(this);
         this.menu.add(this.menuItemChangePlayers);
         this.menu.addSeparator();
         this.menuItemLeave = new JMenuItem("Leave game");
+        this.menuItemLeave.addActionListener(this);
         this.menu.add(this.menuItemLeave);
         this.bar.add(this.menu);
 
@@ -123,20 +126,103 @@ public final class NimGame extends JFrame implements ActionListener
     {
         if(ae.getSource() == this.menuItemReset)
         {   
-            JOptionPane jop = new JOptionPane();
-            int option = jop.showConfirmDialog(null, "Do you want to restart the game?",
-                    "Restart game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(option == JOptionPane.OK_OPTION)
+            if(((Nim)this.app.getGameSelected()).getMatches() != 0)
             {
-                NimGame ng2 = new NimGame(this.app);
-                ng2.setTitle("Nim");
-                ng2.pack();                
-                ng2.setLocationRelativeTo(null);
-                ng2.setVisible(true);
-                ng2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.dispose();
+                JOptionPane jop = new JOptionPane();
+                int option = jop.showConfirmDialog(null, "Do you want to restart the game?",
+                        "Restart game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option == JOptionPane.OK_OPTION)
+                {
+                    this.nimGame();
+                }
             }
-        }    
+            else
+            {
+                this.nimGame();
+            }           
+        }
+        
+        if(ae.getSource() == this.menuItemGameSelect)
+        {
+            if(((Nim)this.app.getGameSelected()).getMatches() != 0)
+            {
+                JOptionPane jop = new JOptionPane();
+                int option = jop.showConfirmDialog(null, "Do you want to change game?",
+                        "Change game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option == JOptionPane.OK_OPTION)
+                {
+                    this.gameChoice();
+                }
+            }
+            else
+            {
+                this.gameChoice();
+            }
+        }
+        
+        if (ae.getSource() == this.menuItemChangePlayers)
+        {
+            if(((Nim)this.app.getGameSelected()).getMatches() != 0)
+            {
+                JOptionPane jop = new JOptionPane();
+                int option = jop.showConfirmDialog(null, "Do you want change players?",
+                        "Change players", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option == JOptionPane.OK_OPTION)
+                {
+                    this.creationPlayers();
+                }
+            }
+            else
+            {
+                this.creationPlayers();
+            }
+        }
+        
+        if(ae.getSource() == this.menuItemLeave)
+        {
+            Credits c = new Credits();
+            c.setTitle("Credits");
+            c.pack();
+            c.setLocationRelativeTo(null);
+            c.setVisible(true);
+            c.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
+    }
+    
+    /*------------------- Functons Listener -----------------*/
+    
+    public void nimGame()
+    {
+        NimGame ng = new NimGame(this.app);
+        ng.setTitle("Nim");
+        ng.pack();                
+        ng.setLocationRelativeTo(null);
+        ng.setVisible(true);
+        ng.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }
+    
+    public void gameChoice()
+    {
+        GameChoice gc = new GameChoice(this.app);
+        gc.setTitle("Game Choice");
+        gc.pack();                
+        gc.setLocationRelativeTo(null);
+        gc.setVisible(true);
+        gc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }
+    
+    public void creationPlayers()
+    {
+        PlayersCreation pc = new PlayersCreation();
+        pc.setTitle("Player Creation");
+        pc.pack();
+        pc.setLocationRelativeTo(null);
+        pc.setVisible(true);
+        pc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }
 
     /*------------------- Getters and Setters ---------------*/
