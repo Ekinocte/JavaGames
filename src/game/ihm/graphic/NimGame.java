@@ -134,7 +134,8 @@ public final class NimGame extends JFrame implements ActionListener
         
         this.boardTitle = new JLabel("Nb matches left :" + gameP.getMatches());
         this.boardTitle.setHorizontalAlignment(JLabel.CENTER);
-        this.panelGameBoard.add(boardTitle, BorderLayout.NORTH); 
+        this.panelGameBoard.add(boardTitle, BorderLayout.NORTH);
+        this.boardDisplayMatches();
         
     	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
     	this.panelGameBoard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -319,6 +320,11 @@ public final class NimGame extends JFrame implements ActionListener
         {
             this.boardMatches.add('|');
         }
+    }
+    
+    public void boardDisplayMatches()
+    {
+        
     }
     
     /*------------------- Getters and Setters ---------------*/
