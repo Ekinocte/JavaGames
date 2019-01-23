@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -54,13 +55,18 @@ public final class NimGame extends JFrame implements ActionListener
     private JMenuItem menuItemGameSelect;
     private JMenuItem menuItemChangePlayers;
     private JMenuItem menuItemLeave;
+    
+    private ArrayList<Character> boardMatches;
+    private JLabel boardTitle;
 
 
     public NimGame(App app)
     {
         this.app = app;
-        Nim GameP = ((Nim)this.app.getGameSelected());
-        GameP.setMatches(GameP.getMatchesBase());
+        Nim gameP = ((Nim)this.app.getGameSelected());
+        gameP.setMatches(gameP.getMatchesBase());
+        this.boardMatches = new ArrayList<Character>();
+        this.initBoardMatches();
         this.setPreferredSize(new Dimension(600, 600));// to delete
 
         this.menu();
@@ -117,7 +123,15 @@ public final class NimGame extends JFrame implements ActionListener
 
     public void gameBoard() 
     {
+        Nim gameP = ((Nim)this.app.getGameSelected());
+        gameP.setMatches(gameP.getMatchesBase());
+        
     	this.panelGameBoard = new JPanel();
+        
+        this.boardTitle = new JLabel("Nb matches left :" + gameP.getMatches());
+        this.boardTitle.setHorizontalAlignment(JLabel.CENTER);
+        this.panelGameBoard.add(boardTitle, BorderLayout.NORTH); 
+        
     	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
     	this.panelGameBoard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
@@ -292,6 +306,17 @@ public final class NimGame extends JFrame implements ActionListener
         this.dispose();
     }
 
+    /*------------------- Functions game board --------------*/
+    
+    public void initBoardMatches()
+    {
+        int cptMatches = ((Nim)this.app.getGameSelected()).getMatches();
+        for (int i=0; i<cptMatches; i++)
+        {
+            this.boardMatches.add('|');
+        }
+    }
+    
     /*------------------- Getters and Setters ---------------*/
 
     public App getApp() 
