@@ -69,8 +69,6 @@ public final class NimGame extends JFrame implements ActionListener
         this.app = app;
         Nim gameP = ((Nim)this.app.getGameSelected());
         gameP.setMatches(gameP.getMatchesBase());
-        this.boardMatches = new ArrayList<Character>();
-        this.initBoardMatches();
         this.setPreferredSize(new Dimension(600, 600));// to delete
 
         this.menu();
@@ -312,15 +310,6 @@ public final class NimGame extends JFrame implements ActionListener
     }
 
     /*------------------- Functions game board --------------*/
-    
-    public void initBoardMatches()
-    {
-        int cptMatches = ((Nim)this.app.getGameSelected()).getMatches();
-        for (int i=0; i<cptMatches; i++)
-        {
-            this.boardMatches.add('|');
-        }
-    }
     
     public void boardDisplayMatches()
     {
