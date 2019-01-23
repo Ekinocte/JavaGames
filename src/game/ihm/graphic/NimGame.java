@@ -14,7 +14,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -335,7 +334,18 @@ public final class NimGame extends JFrame implements ActionListener
     
     public void boardDisplayMatches()
     {
+        Nim gameP = ((Nim)this.app.getGameSelected());
+        gameP.setMatches(gameP.getMatchesBase());
         
+        String str = new String();
+        for (int i=0; i<gameP.getMatches(); i++)
+        {
+            str = str + " |";
+        }
+        
+        this.boardMatches = new JLabel(str);
+        this.boardMatches.setHorizontalAlignment(JLabel.CENTER);
+        this.panelGameBoard.add(this.boardMatches, BorderLayout.CENTER);
     }
     
     /*------------------- Getters and Setters ---------------*/
