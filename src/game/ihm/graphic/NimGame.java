@@ -320,7 +320,15 @@ public final class NimGame extends JFrame implements ActionListener
         	System.out.println(i);
         	System.out.println(((Nim)this.app.getGameSelected()).getMatches());
         	this.panelGameZone.removeAll();
-        	this.gameZone();
+                this.menu();
+                if (((Nim)this.app.getGameSelected()).getMatches()>0)
+                {
+                    this.gameZone();
+                }
+                else
+                {
+                    this.winner();
+                }
         	this.panelGameZone.revalidate();
         	this.panelGameZone.repaint();
         }
@@ -366,7 +374,7 @@ public final class NimGame extends JFrame implements ActionListener
     public void boardDisplayMatches()
     {
         Nim gameP = ((Nim)this.app.getGameSelected());
-        gameP.setMatches(gameP.getMatchesBase());
+        gameP.setMatches(gameP.getMatches());
         
         String str = new String();
         for (int i=0; i<gameP.getMatches(); i++)
@@ -377,6 +385,13 @@ public final class NimGame extends JFrame implements ActionListener
         this.boardMatches = new JLabel(str);
         this.boardMatches.setHorizontalAlignment(JLabel.CENTER);
         this.panelGameBoard.add(this.boardMatches, BorderLayout.CENTER);
+    }
+    
+    /*-------------------- Win ------------------------------*/
+    
+    public void winner()
+    {
+        
     }
     
     /*------------------- Getters and Setters ---------------*/
