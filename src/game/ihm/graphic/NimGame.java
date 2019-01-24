@@ -293,9 +293,9 @@ public final class NimGame extends JFrame implements ActionListener
         	int i = (int) this.cbMatchesTaken.getSelectedItem();
         	((Nim)this.app.getGameSelected()).takeMatches(i);
         	
-        	this.gameZone();
-        	this.panelGameZone.repaint();
+        	this.nextTurn();
         	this.panelGameZone.revalidate();
+        	this.panelGameZone.repaint();
         }
     }
     
@@ -350,6 +350,27 @@ public final class NimGame extends JFrame implements ActionListener
         this.boardMatches = new JLabel(str);
         this.boardMatches.setHorizontalAlignment(JLabel.CENTER);
         this.panelGameBoard.add(this.boardMatches, BorderLayout.CENTER);
+    }
+    
+    public void nextTurn() {
+    	this.panelGameZone = new JPanel();
+    	this.panelGameZone.setLayout(new BorderLayout());
+    	this.getContentPane().add(this.panelGameZone, BorderLayout.CENTER);
+    	
+    	Nim gameP =((Nim)this.app.getGameSelected());
+    	
+    	this.panelGameBoard = new JPanel();
+        
+        this.boardTitle = new JLabel("Nb matches left :" + gameP.getMatches());
+        this.boardTitle.setHorizontalAlignment(JLabel.CENTER);
+        this.panelGameBoard.add(boardTitle, BorderLayout.NORTH);
+        this.boardDisplayMatches();
+        
+    	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
+    	this.panelGameBoard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    	
+    	this.end();
+    	this.histo();
     }
     
     /*------------------- Getters and Setters ---------------*/
