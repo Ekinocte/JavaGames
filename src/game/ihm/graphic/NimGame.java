@@ -196,13 +196,16 @@ public final class NimGame extends JFrame implements ActionListener
     
     public void listPlayers() 
     {
-    	for(Player p : this.app.getGameSelected().getPlayersInGame())
-    	{
-    		this.panelInfoPlayers.add(new JLabel("\n"+p.toString()));
-    		this.panelInfoPlayers.add(new JLabel(" Win: " + p.getCptGameWin()));
-    		this.panelInfoPlayers.add(new JLabel(" Games played: " + p.getCptGamePlayed()));
-    		this.panelInfoPlayers.add(new JLabel(" \n \n "));
-    	}
+        for (int i=0; i<this.app.getGameSelected().getPlayersInGame().size(); i++)
+        {
+            this.panelInfoPlayers.add(
+                    new JLabel("\n Player :" +(i+1) + " "
+                            +this.app.getGameSelected().getPlayerInGame(i).getLastName()
+                            +" Win: " + this.app.getGameSelected().getPlayerInGame(i).getCptGameWin()
+                            + " Games played: " 
+                            +this.app.getGameSelected().getPlayerInGame(i).getCptGamePlayed()));
+            this.panelInfoPlayers.add(new JLabel(" \n \n "));
+        }
     }
     
     public void listrules() 
