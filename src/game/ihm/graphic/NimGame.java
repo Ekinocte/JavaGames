@@ -61,6 +61,8 @@ public final class NimGame extends JFrame implements ActionListener
     private JLabel boardTitle;
     private JLabel boardMatches;
     
+    private JLabel winner;
+    
     private JButton bEnd;
     private JComboBox cbMatchesTaken;
     
