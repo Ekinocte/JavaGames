@@ -393,7 +393,59 @@ public final class NimGame extends JFrame implements ActionListener
     
     public void winner()
     {
+        int player;
         
+        if((this.app.getGameSelected().getBeginPlayer()==0 && this.round%2==0)
+                || (this.app.getGameSelected().getBeginPlayer()==1 && this.round%2!=0))
+        {
+            player = 0;        
+        }
+        else
+        {
+            player=1;
+        }
+        
+        this.app.getGameSelected().getPlayerInGame(0).setCptGamePlayed(
+                    this.app.getGameSelected().getPlayerInGame(0).getCptGamePlayed()+1);
+        this.app.getGameSelected().getPlayerInGame(1).setCptGamePlayed(
+                    this.app.getGameSelected().getPlayerInGame(1).getCptGamePlayed()+1);
+        
+        if(((Nim)this.app.getGameSelected()).getLastObjectTakenWin() ==true)
+        {
+            if (player==0)
+            {
+                this.winner = new JLabel("Player" + 2 + "win");
+                this.panelGameZone.add(this.winner);
+                this.app.getGameSelected().getPlayerInGame(1).setCptGameWin(
+                        this.app.getGameSelected().getPlayerInGame(1).getCptGameWin()+1);
+                    
+            }
+            else
+            {
+                this.winner = new JLabel("Player " + 1 + " win");
+                this.panelGameZone.add(this.winner); 
+                this.app.getGameSelected().getPlayerInGame(0).setCptGameWin(
+                        this.app.getGameSelected().getPlayerInGame(0).getCptGameWin()+1);
+            }
+        }
+        else
+        {
+            if(player==0)
+            {
+                this.winner = new JLabel("Player " + 1 + " win");
+                this.panelGameZone.add(this.winner);
+                this.app.getGameSelected().getPlayerInGame(0).setCptGameWin(
+                        this.app.getGameSelected().getPlayerInGame(0).getCptGameWin()+1);
+            }
+            else
+            {
+                this.winner = new JLabel("Player " + 2 + " win");
+                this.panelGameZone.add(this.winner);
+                this.app.getGameSelected().getPlayerInGame(1).setCptGameWin(
+                        this.app.getGameSelected().getPlayerInGame(1).getCptGameWin()+1);
+            }
+        }
+                    
     }
     
     /*------------------- Getters and Setters ---------------*/
