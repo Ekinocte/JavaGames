@@ -62,6 +62,8 @@ public final class NimGame extends JFrame implements ActionListener
     
     private JButton bEnd;
     private JComboBox cbMatchesTaken;
+    
+    private int round = 0;
 
 
     public NimGame(App app)
@@ -294,6 +296,8 @@ public final class NimGame extends JFrame implements ActionListener
         	int i = (int) this.cbMatchesTaken.getSelectedItem();
         	((Nim)this.app.getGameSelected()).takeMatches(i);
         	
+        	System.out.println(i);
+        	System.out.println(((Nim)this.app.getGameSelected()).getMatches());
         	this.gameZone();
         	this.panelGameZone.revalidate();
         	this.panelGameZone.repaint();
