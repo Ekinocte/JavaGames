@@ -89,7 +89,7 @@ public class PlayersChoice extends JFrame implements ActionListener{
 		for(Player p : players) {
 			this.playersList.addItem(p);
 		}
-		this.playersList.setMaximumSize(new Dimension(400, 50));
+		this.playersList.setMaximumSize(new Dimension(300, 50));
 		
 		this.badd = new JButton("Add");
 		this.badd.addActionListener(this);

@@ -303,6 +303,7 @@ public final class NimGame extends JFrame implements ActionListener
         	this.round++;
         	System.out.println(i);
         	System.out.println(((Nim)this.app.getGameSelected()).getMatches());
+        	this.panelGameZone.removeAll();
         	this.gameZone();
         	this.panelGameZone.revalidate();
         	this.panelGameZone.repaint();
