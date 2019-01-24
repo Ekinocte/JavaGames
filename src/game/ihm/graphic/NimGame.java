@@ -6,6 +6,7 @@
 package game.ihm.graphic;
 
 import game.model.common.App;
+import game.model.common.player.ComputerNim;
 import game.model.common.player.Player;
 import game.model.nim.Nim;
 
@@ -315,17 +316,33 @@ public final class NimGame extends JFrame implements ActionListener
         
         if(ae.getSource() == this.bEnd) 
         {
+        	int turn;
         	int i = (int) this.cbMatchesTaken.getSelectedItem();
         	((Nim)this.app.getGameSelected()).takeMatches(i);
         	
         	this.round++;
-        	System.out.println(i);
-        	System.out.println(((Nim)this.app.getGameSelected()).getMatches());
+        	
         	this.panelGameZone.removeAll();
-                this.menu();
                 if (((Nim)this.app.getGameSelected()).getMatches()>0)
                 {
-                    this.gameZone();
+                	if((this.app.getGameSelected().getBeginPlayer()==0 && this.round%2==0)
+                            || (this.app.getGameSelected().getBeginPlayer()==1 && this.round%2!=0))
+                    {
+                        turn = 1;        
+                    }
+                    else
+                    {
+                        turn=2;
+                    }
+                	
+                	if(((Nim)this.app.getGameSelected()).getPlayerInGame(turn-1) instanceof ComputerNim)
+                	{
+                		this.computerPlay((ComputerNim)((Nim)this.app.getGameSelected()).getPlayerInGame(turn-1));
+                	}
+                	else
+                	{
+                		this.gameZone();
+                	}
                 }
                 else
                 {
@@ -387,6 +404,24 @@ public final class NimGame extends JFrame implements ActionListener
         this.boardMatches = new JLabel(str);
         this.boardMatches.setHorizontalAlignment(JLabel.CENTER);
         this.panelGameBoard.add(this.boardMatches, BorderLayout.CENTER);
+    }
+    
+    public void computerPlay(ComputerNim cn) {
+    	Nim n = ((Nim)this.app.getGameSelected());
+    	int mTaken = cn.aiEasy(n.getMatches(), n.getCptTakeMatches());
+    	n.takeMatches(mTaken);
+    	this.round++;
+    	this.panelGameZone.removeAll();
+        if (((Nim)this.app.getGameSelected()).getMatches()>0)
+        {
+            this.gameZone();
+        }
+        else
+        {
+            this.winner();
+        }
+        this.panelGameZone.revalidate();
+        this.panelGameZone.repaint();
     }
     
     /*-------------------- Win ------------------------------*/

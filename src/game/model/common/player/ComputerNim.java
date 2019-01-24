@@ -26,7 +26,9 @@ public class ComputerNim extends Computer
     	Random r = new Random();
     	if(cptMatches < cptTakeMatches)
     	{
-            nbMatches = r.nextInt(cptMatches)+1;
+            nbMatches = r.nextInt(cptMatches)+1; 
+            //si le nombre d'alumettes total est inferieur a celui que l'on peut prendre on
+            // lance le random sur le nombre d'alumette totale
     	}
     	else 
     	{
