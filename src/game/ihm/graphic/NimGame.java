@@ -57,6 +57,7 @@ public final class NimGame extends JFrame implements ActionListener
     private JMenuItem menuItemChangePlayers;
     private JMenuItem menuItemLeave;
     
+    private JLabel boardPlayer;
     private JLabel boardTitle;
     private JLabel boardMatches;
     
@@ -127,13 +128,28 @@ public final class NimGame extends JFrame implements ActionListener
 
     public void gameBoard() 
     {   
+        int turn;
         Nim gameP = ((Nim)this.app.getGameSelected());
     	this.panelGameBoard = new JPanel();
         
+        if((this.app.getGameSelected().getBeginPlayer()==0 && this.round%2==0)
+                || (this.app.getGameSelected().getBeginPlayer()==1 && this.round%2!=0))
+        {
+            turn = 1;        
+        }
+        else
+        {
+            turn=2;
+        }
+        this.boardPlayer = new JLabel("Player :" + turn);
+        this.boardPlayer.setHorizontalAlignment(JLabel.CENTER);
+        this.panelGameBoard.add(boardPlayer, BorderLayout.NORTH);
+        
+        this.boardDisplayMatches();
+        
         this.boardTitle = new JLabel("Nb matches left :" + gameP.getMatches());
         this.boardTitle.setHorizontalAlignment(JLabel.CENTER);
-        this.panelGameBoard.add(boardTitle, BorderLayout.NORTH);
-        this.boardDisplayMatches();
+        this.panelGameBoard.add(boardTitle, BorderLayout.SOUTH);
         
     	this.panelGameZone.add(this.panelGameBoard, BorderLayout.CENTER);
     	this.panelGameBoard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
