@@ -72,13 +72,31 @@ public final class NimGame extends JFrame implements ActionListener
 
     public NimGame(App app)
     {
+    	int turn;
         this.app = app;
         Nim gameP = ((Nim)this.app.getGameSelected());
         gameP.setMatches(gameP.getMatchesBase());
         this.setPreferredSize(new Dimension(600, 600));// to delete
 
         this.menu();
-        this.gameZone();
+        if((this.app.getGameSelected().getBeginPlayer()==0 && this.round%2==0)
+                || (this.app.getGameSelected().getBeginPlayer()==1 && this.round%2!=0))
+        {
+            turn = 0;        
+        }
+        else
+        {
+            turn=1;
+        }
+    	
+    	if(((Nim)this.app.getGameSelected()).getPlayerInGame(turn) instanceof ComputerNim)
+    	{
+    		this.computerPlay((ComputerNim)((Nim)this.app.getGameSelected()).getPlayerInGame(turn));
+    	}
+    	else
+    	{
+    		this.gameZone();
+    	}
         this.info();
     }
 
@@ -189,7 +207,6 @@ public final class NimGame extends JFrame implements ActionListener
     	this.panelEnd = new JPanel();
     	this.panelEnd.setLayout(new BorderLayout());
     	
-    	System.out.println("end");
     	this.bEnd = new JButton("End round");
     	this.bEnd.addActionListener(this);
     	this.cbMatchesTaken = new JComboBox();
@@ -407,14 +424,35 @@ public final class NimGame extends JFrame implements ActionListener
     }
     
     public void computerPlay(ComputerNim cn) {
+    	int turn;
     	Nim n = ((Nim)this.app.getGameSelected());
     	int mTaken = cn.aiEasy(n.getMatches(), n.getCptTakeMatches());
     	n.takeMatches(mTaken);
+    	if (this.panelGameZone != null)
+    	{
+        	this.panelGameZone.removeAll();
+    	}
     	this.round++;
-    	this.panelGameZone.removeAll();
-        if (((Nim)this.app.getGameSelected()).getMatches()>0)
+    	if (((Nim)this.app.getGameSelected()).getMatches()>0)
         {
-            this.gameZone();
+        	if((this.app.getGameSelected().getBeginPlayer()==0 && this.round%2==0)
+                    || (this.app.getGameSelected().getBeginPlayer()==1 && this.round%2!=0))
+            {
+                turn = 1;        
+            }
+            else
+            {
+                turn=0;
+            }
+        	
+        	if(((Nim)this.app.getGameSelected()).getPlayerInGame(turn) instanceof ComputerNim)
+        	{
+        		this.computerPlay((ComputerNim)((Nim)this.app.getGameSelected()).getPlayerInGame(turn));
+        	}
+        	else
+        	{
+        		this.gameZone();
+        	}
         }
         else
         {
@@ -429,6 +467,9 @@ public final class NimGame extends JFrame implements ActionListener
     public void winner()
     {
         int player;
+        this.panelGameZone = new JPanel();
+        this.panelGameZone.setLayout(new BorderLayout());
+    	this.getContentPane().add(this.panelGameZone, BorderLayout.CENTER);
         
         if((this.app.getGameSelected().getBeginPlayer()==0 && this.round%2==0)
                 || (this.app.getGameSelected().getBeginPlayer()==1 && this.round%2!=0))
@@ -450,7 +491,7 @@ public final class NimGame extends JFrame implements ActionListener
             if (player==0)
             {
                 this.winner = new JLabel("Player" + 2 + "win");
-                this.panelGameZone.add(this.winner);
+                this.panelGameZone.add(this.winner, BorderLayout.CENTER);
                 this.app.getGameSelected().getPlayerInGame(1).setCptGameWin(
                         this.app.getGameSelected().getPlayerInGame(1).getCptGameWin()+1);
                     
@@ -458,7 +499,7 @@ public final class NimGame extends JFrame implements ActionListener
             else
             {
                 this.winner = new JLabel("Player " + 1 + " win");
-                this.panelGameZone.add(this.winner); 
+                this.panelGameZone.add(this.winner, BorderLayout.CENTER); 
                 this.app.getGameSelected().getPlayerInGame(0).setCptGameWin(
                         this.app.getGameSelected().getPlayerInGame(0).getCptGameWin()+1);
             }
@@ -468,14 +509,14 @@ public final class NimGame extends JFrame implements ActionListener
             if(player==0)
             {
                 this.winner = new JLabel("Player " + 1 + " win");
-                this.panelGameZone.add(this.winner);
+                this.panelGameZone.add(this.winner, BorderLayout.CENTER);
                 this.app.getGameSelected().getPlayerInGame(0).setCptGameWin(
                         this.app.getGameSelected().getPlayerInGame(0).getCptGameWin()+1);
             }
             else
             {
                 this.winner = new JLabel("Player " + 2 + " win");
-                this.panelGameZone.add(this.winner);
+                this.panelGameZone.add(this.winner, BorderLayout.CENTER);
                 this.app.getGameSelected().getPlayerInGame(1).setCptGameWin(
                         this.app.getGameSelected().getPlayerInGame(1).getCptGameWin()+1);
             }

@@ -20,7 +20,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 
 import game.model.common.App;
+import game.model.common.player.Computer;
+import game.model.common.player.ComputerNim;
 import game.model.common.player.Human;
+import game.model.common.player.HumanNim;
 import game.model.common.player.Player;
 import game.model.nim.Nim;
 
@@ -125,9 +128,15 @@ public class PlayersChoice extends JFrame implements ActionListener{
 			{
 				if(this.app.getGameSelected().getPlayersInGame().size()<2 && this.app.getGameSelected() instanceof Nim) {
 					Player p = (Player)this.playersList.getSelectedItem();
-					this.app.getGameSelected().setPlayerInGame(p);
+					if (p instanceof Computer)
+					{
+						this.app.getGameSelected().getPlayersInGame().add(new ComputerNim(p.getLastName()));
+					}
+					else
+					{
+						this.app.getGameSelected().getPlayersInGame().add(new HumanNim((Human)p));
+					}
 					this.body.add(new JLabel("- "+p.toString()));
-					
 					this.body.revalidate();
 					this.body.repaint();
 				}
@@ -162,17 +171,14 @@ public class PlayersChoice extends JFrame implements ActionListener{
 	public void beginChoice() {
 		if(this.bName.isSelected()) 
 		{
-			System.out.println("name");
 			this.app.getGameSelected().lastNameSelectBegginer();
 		}
 		else if(this.bYear.isSelected() && !this.onlyComputer())
 		{
-			System.out.println("year");
 			this.app.getGameSelected().youngerSelectBegginer();
 		}
 		else 
 		{
-			System.out.println("ramdom");
 			this.app.getGameSelected().randomSelectBegginer();
 		}
 	}
